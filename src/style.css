@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --custom-bg-color: theme(--color-white)
+  }
+
+  .dark {
+    --custom-bg-color: theme(--color-slate-900)
+  }
+
+  html {
+    color-scheme: light dark;
+    /* font */
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+
+    /* tailwind CSS */
+    @apply scroll-smooth;
+  }
+}
