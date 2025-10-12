@@ -181,7 +181,7 @@
   }
 
   .navbar-profile-title {
-    @apply cursor-pointer block md:hidden lg:block;
+    @apply cursor-pointer hidden sm:block md:hidden lg:block;
   }
 
   .navbar-link {
