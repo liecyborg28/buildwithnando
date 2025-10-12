@@ -215,7 +215,7 @@
 
   /* drawer */
   .drawer {
-    @apply flex flex-col w-[40vw] md:w-[20vw] h-[calc(80vh)] md:hidden fixed rounded-2xl right-4 top-27 duration-500 opacity-0;
+    @apply flex flex-col w-[60vw] sm:w-[40vw] md:w-[20vw] h-[calc(80vh)] md:hidden fixed rounded-2xl right-4 top-27 duration-500 opacity-0;
   }
 
   .show {
