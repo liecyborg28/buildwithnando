@@ -1,30 +1,243 @@
 @import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
 @layer base {
   :root {
-    --custom-bg-color: theme(--color-white)
+    --font-family-primary: "Rubik", sans-serif;
+    --font-family-secondary: "Urbanist", sans-serif;
+    --text-color: 15 23 42;
+    --custom-bg-color: 255 255 255;
+    --glass-bg: 15 23 42;
+    --glass-border: 15 23 42;
+    /* --bg-gradient: linear-gradient(135deg,
+        #bae6fd 0%,
+        #fbcfe8 50%,
+        #fefce8 100%); */
+    --bg-gradient: radial-gradient(circle at 40% 40%,
+        #bae6fd 0%,
+        #fbcfe8 50%,
+        #fefce8 100%);
   }
 
   .dark {
-    --custom-bg-color: theme(--color-slate-900)
+    --text-color: 255 255 255;
+    --custom-bg-color: 15 23 42;
+    --glass-bg: 255 255 255;
+    --glass-border: 255 255 255;
+    /* --bg-gradient: linear-gradient(135deg,
+        #0f172a 0%,
+        #1e3a8a 50%,
+        #334155 100%); */
+    --bg-gradient: radial-gradient(circle at 60% 60%,
+        #1e3a8a 0%,
+        #6366f1 40%,
+        #0f172a 100%);
+
   }
 
   html {
     color-scheme: light dark;
-    /* font */
-    font-family: "Urbanist", sans-serif;
+    /* font-family: */
+    font-family: var(--font-family-primary);
+
     font-optical-sizing: auto;
     font-weight: normal;
     font-style: normal;
 
+    background-color: var(--custom-bg-color);
     /* tailwind CSS */
     @apply scroll-smooth;
   }
 }
 
 @layer components {
+  .font-family-primary {
+    font-family: var(--font-family-primary);
+  }
+
+  .font-family-secondary {
+    font-family: var(--font-family-secondary);
+  }
+
+  .glow-text {
+    color: rgb(var(--text-color));
+    text-shadow:
+      0 0 6px rgb(var(--text-color) / 0.5),
+      0 0 12px rgb(var(--text-color) / 0.4),
+      0 0 20px rgb(var(--text-color) / 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .glow-text-animate {
+    color: rgb(var(--text-color));
+    text-shadow:
+      0 0 8px rgb(var(--text-color) / 0.6),
+      0 0 16px rgb(var(--text-color) / 0.4),
+      0 0 24px rgb(var(--text-color) / 0.2);
+    animation: glow-pulse 2.5s ease-in-out infinite alternate;
+  }
+
+  /* for text */
+  @keyframes glow-pulse {
+    from {
+      text-shadow:
+        0 0 4px rgb(var(--text-color) / 0.4),
+        0 0 8px rgb(var(--text-color) / 0.3),
+        0 0 12px rgb(var(--text-color) / 0.2);
+    }
+
+    to {
+      text-shadow:
+        0 0 10px rgb(var(--text-color) / 0.7),
+        0 0 20px rgb(var(--text-color) / 0.5),
+        0 0 30px rgb(var(--text-color) / 0.3);
+    }
+  }
+
+  /* for linear-gradient */
+  @keyframes gradient-move {
+    0% {
+      background-position: 0% 0%;
+      /* kiri atas */
+    }
+
+    25% {
+      background-position: 100% 0%;
+      /* kanan atas */
+    }
+
+    50% {
+      background-position: 100% 100%;
+      /* kanan bawah */
+    }
+
+    75% {
+      background-position: 0% 100%;
+      /* kiri bawah */
+    }
+
+    100% {
+      background-position: 0% 0%;
+      /* balik lagi ke kiri atas */
+    }
+  }
+
+  /* for radiant-gradient */
+  @keyframes radiant-shift {
+    0% {
+      background-position: 50% 50%;
+    }
+
+    25% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 50% 100%;
+    }
+
+    75% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 50% 50%;
+    }
+  }
+
   .glass {
-    @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-lg;
+    background-color: rgb(var(--glass-bg) / 0.1);
+    border-color: rgb(var(--glass-border) / 0.2);
+    @apply backdrop-blur-md border shadow-lg;
+  }
+
+  .app-container {
+    background: var(--bg-gradient);
+    background-size: 300% 300%;
+    animation: gradient-move 10s ease infinite;
+    @apply w-screen h-screen flex flex-col;
+  }
+
+  /* navbar */
+  .navbar {
+    @apply flex items-center justify-between fixed w-[calc(100vw-32px)] rounded-2xl left-4 top-4 p-4;
+  }
+
+  .navbar-profile {
+    @apply flex items-center gap-2;
+  }
+
+  .navbar-profile-avatar {
+    @apply bg-black text-white rounded-full min-w-10 min-h-10 flex justify-center items-center;
+  }
+
+  .navbar-profile-avatar-text {
+    @apply font-bold transition duration-200 cursor-pointer;
+  }
+
+  .navbar-profile-avatar:hover .navbar-profile-avatar-text {
+    @apply transform scale-120;
+  }
+
+  .navbar-profile-title {
+    @apply cursor-pointer block md:hidden lg:block;
+  }
+
+  .navbar-link {
+    @apply flex gap-5 items-center;
+  }
+
+  .navbar-link-item {
+    color: rgb(var(--text-color));
+    @apply cursor-pointer hidden sm:hidden md:block;
+  }
+
+  .navbar-link-icon {
+    @apply cursor-pointer block sm:block md:hidden;
+  }
+
+  [data-lucide="menu"] {
+    color: rgb(var(--text-color));
+  }
+
+  .navbar-link-switch-mode {
+    @apply flex w-20 h-10 p-1 rounded-4xl items-center cursor-pointer;
+  }
+
+  .navbar-link-switch-mode-indicator {
+    @apply w-8 h-8 rounded-full flex justify-center items-center transition ease-in duration-200;
+  }
+
+  .toggle-dark {
+    @apply justify-end;
+  }
+
+  /* drawer */
+  .drawer {
+    @apply flex flex-col w-[40vw] md:w-[20vw] h-[calc(80vh)] md:hidden fixed rounded-2xl right-4 top-27 duration-500 opacity-0;
+  }
+
+  .show {
+    @apply opacity-100;
+  }
+
+  .drawer-link {
+    @apply flex flex-col gap-5 p-4;
+  }
+
+  .drawer-link-item {
+    color: rgb(var(--text-color));
+  }
+
+  .close-drawer {
+    @apply flex justify-end;
+  }
+
+  /* content */
+  .content {
+    height: calc(100vh - 16px);
+    max-height: calc(100vh - 16px);
+    @apply mt-4 w-full overflow-auto flex flex-col;
   }
 }

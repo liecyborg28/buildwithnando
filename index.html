@@ -1,27 +1,85 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="./src/style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
   <title>Fernando Lie | Fullstack Developer</title>
 </head>
 
 <body>
-  <div id="app" class="container w-screen h-screen flex flex-col">
-    <div class="glass flex items-center justify-between fixed w-[calc(100vw-32px)] rounded-2xl left-4 top-4 p-4">
-      <div class="flex items-center gap-2">
-        <div class="bg-black text-white rounded-full w-10 h-10 flex justify-center items-center">FL</div>
-        <span>Build with Nando</span>
+  <div id="app" class="app-container">
+    <!-- navigation -->
+    <nav class="navbar glass">
+      <div class="navbar-profile">
+        <div class="navbar-profile-avatar">
+          <span class="navbar-profile-avatar-text font-family-primary">
+            FL
+          </span>
+        </div>
+        <span class="navbar-profile-title glow-text glow-text-animate font-family-primary">Build with Nando</span>
       </div>
-      <div class="flex gap-5">
-        <span class="cursor-pointer">About</span>
-        <span class="cursor-pointer">Skills</span>
-        <span class="cursor-pointer">Projects</span>
-        <span class="cursor-pointer">Contact</span>
+      <div class="navbar-link">
+        <a href="#about">
+          <span class="navbar-link-item font-family-primary">About</span>
+        </a>
+        <a href="#skills">
+          <span class="navbar-link-item font-family-primary">Skills</span>
+        </a>
+        <span class="navbar-link-item font-family-primary">
+          <a href="#experiences">Experiences</a>
+        </span>
+        <a href="#projects">
+          <span class="navbar-link-item font-family-primary">Projects</span>
+        </a>
+        <a href="#contact">
+          <span class="navbar-link-item font-family-primary">Contact</span>
+        </a>
+        <div class="navbar-link-switch-mode glass">
+          <div class="navbar-link-switch-mode-indicator glass">
+            <span class="light-icon hidden">
+              <i class="text-amber-300 fill-amber-300" data-lucide="sun-dim"></i>
+            </span>
+            <span class="dark-icon">
+              <i class="fill-slate-600 stroke-0" data-lucide="moon"></i>
+            </span>
+          </div>
+        </div>
+        <span class="navbar-link-icon">
+          <i data-lucide="menu"></i>
+        </span>
       </div>
+    </nav>
+    <nav class="drawer glass">
+      <div class="drawer-link">
+        <span class="close-drawer">
+          <i class="cursor-pointer" data-lucide="x"></i>
+        </span>
+        <span class="drawer-link-item font-family-primary">
+          <a href="#about">About</a>
+        </span>
+        <span class="drawer-link-item font-family-primary">
+          <a href="#skills">Skills</a>
+        </span>
+        <span class="drawer-link-item font-family-primary">
+          <a href="#experiences">Experiences</a>
+        </span>
+        <span class="drawer-link-item font-family-primary">
+          <a href="#projects">Projects</a>
+        </span>
+        <span class="drawer-link-item font-family-primary">
+          <a href="#contact">Contact</a>
+        </span>
+      </div>
+    </nav>
+    <div class="content">
+      <section id="about"></section>
+      <section id="skills"></section>
+      <section id="projects"></section>
+      <section id="contact"></section>
     </div>
   </div>
   <script type="module" src="/src/main.ts"></script>
