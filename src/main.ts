@@ -66,5 +66,5 @@ menu.addEventListener("click", () => {
 });
 
 closeDrawer.addEventListener("click", () => {
-  drawer.classList.toggle("show");
+  drawer.classList.remove("show");
 });
