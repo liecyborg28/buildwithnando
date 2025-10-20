@@ -38,17 +38,15 @@
     font-style: normal;
 
     background-color: var(--custom-bg-color);
+
+    scrollbar-width: none;
+
     /* tailwind CSS */
     @apply scroll-smooth;
   }
 
   ::-webkit-scrollbar {
     display: none;
-  }
-
-  html,
-  body {
-    scrollbar-width: none;
   }
 
   button {
@@ -244,16 +242,16 @@
   .content {
     height: calc(100vh - 16px);
     max-height: calc(100vh - 16px);
-    @apply mt-4 w-full overflow-auto flex flex-col;
+    @apply mt-4 mx-4 overflow-auto flex flex-col min-w-min rounded-t-2xl;
   }
 
   /* section */
   section {
-    @apply mx-4 flex pt-27;
+    @apply flex pt-27;
   }
 
   #about {
-    @apply flex-col md:flex-row h-screen items-center gap-5 md:my-10;
+    @apply flex-col md:flex-row h-screen items-center gap-5 md:my-12;
   }
 
   .about-avatar {
@@ -296,5 +294,31 @@
 
   .about-button-right:hover {
     @apply bg-black text-white;
+  }
+
+  /* swiper */
+  .swiper {
+    @apply w-[calc(100vw-2rem)];
+  }
+
+  .swiper-slide {
+    @apply flex justify-center items-center;
+  }
+
+  .swiper-item {
+    @apply flex flex-col items-center gap-1;
+  }
+
+  .swiper-item-image-container {
+    @apply min-w-10 min-h-10 flex justify-center items-center rounded-xl md:rounded-2xl sm:min-w-15 sm:min-h-15 md:min-w-25 md:min-h-25 bg-white;
+  }
+
+  .swiper-item-image {
+    @apply w-5 h-5 sm:w-10 sm:h-10 md:w-15 md:h-15;
+  }
+
+  .swiper-item-image-text {
+    color: rgb(var(--text-color));
+    @apply font-normal text-[10px] sm:text-xs md:text-sm;
   }
 }

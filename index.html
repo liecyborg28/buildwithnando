@@ -5,39 +5,37 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="./src/style.css">
+
+  <link rel="stylesheet" href="./src/style.css" />
   <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- ✅ Swiper CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+
   <title>Fernando Lie | Fullstack Developer</title>
 </head>
 
 <body>
   <div id="app" class="app-container">
-    <!-- navigation -->
+    <!-- NAVBAR -->
     <nav class="navbar glass">
       <div class="navbar-profile">
         <div class="navbar-profile-avatar">
-          <span class="navbar-profile-avatar-text font-family-primary">
-            FL
-          </span>
+          <span class="navbar-profile-avatar-text font-family-primary">FL</span>
         </div>
-        <span class="navbar-profile-title glow-text glow-text-animate font-family-primary">Build with Nando</span>
-      </div>
-      <div class="navbar-link">
-        <a href="#about">
-          <span class="navbar-link-item font-family-primary">About</span>
-        </a>
-        <a href="#skills">
-          <span class="navbar-link-item font-family-primary">Skills</span>
-        </a>
-        <span class="navbar-link-item font-family-primary">
-          <a href="#experiences">Experiences</a>
+        <span class="navbar-profile-title glow-text glow-text-animate font-family-primary">
+          Build with Nando
         </span>
-        <a href="#projects">
-          <span class="navbar-link-item font-family-primary">Projects</span>
-        </a>
-        <a href="#contact">
-          <span class="navbar-link-item font-family-primary">Contact</span>
-        </a>
+      </div>
+
+      <div class="navbar-link">
+        <a href="#about"><span class="navbar-link-item font-family-primary">About</span></a>
+        <a href="#skills"><span class="navbar-link-item font-family-primary">Skills</span></a>
+        <a href="#experiences"><span class="navbar-link-item font-family-primary">Experiences</span></a>
+        <a href="#projects"><span class="navbar-link-item font-family-primary">Projects</span></a>
+        <a href="#contact"><span class="navbar-link-item font-family-primary">Contact</span></a>
+
         <div class="navbar-link-switch-mode glass">
           <div class="navbar-link-switch-mode-indicator glass">
             <span class="light-icon hidden">
@@ -48,33 +46,28 @@
             </span>
           </div>
         </div>
+
         <span class="navbar-link-icon">
           <i data-lucide="menu"></i>
         </span>
       </div>
     </nav>
+
+    <!-- DRAWER -->
     <nav class="drawer glass">
       <div class="drawer-link">
         <span class="close-drawer">
           <i class="cursor-pointer" data-lucide="x"></i>
         </span>
-        <span class="drawer-link-item font-family-primary">
-          <a href="#about">About</a>
-        </span>
-        <span class="drawer-link-item font-family-primary">
-          <a href="#skills">Skills</a>
-        </span>
-        <span class="drawer-link-item font-family-primary">
-          <a href="#experiences">Experiences</a>
-        </span>
-        <span class="drawer-link-item font-family-primary">
-          <a href="#projects">Projects</a>
-        </span>
-        <span class="drawer-link-item font-family-primary">
-          <a href="#contact">Contact</a>
-        </span>
+        <span class="drawer-link-item font-family-primary"><a href="#about">About</a></span>
+        <span class="drawer-link-item font-family-primary"><a href="#skills">Skills</a></span>
+        <span class="drawer-link-item font-family-primary"><a href="#experiences">Experiences</a></span>
+        <span class="drawer-link-item font-family-primary"><a href="#projects">Projects</a></span>
+        <span class="drawer-link-item font-family-primary"><a href="#contact">Contact</a></span>
       </div>
     </nav>
+
+    <!-- CONTENT -->
     <div class="content">
       <section id="about">
         <div class="about-avatar glass"></div>
@@ -84,35 +77,37 @@
             <span class="about-text-role">Fullstack Developer</span>
             <span class="about-text-desc">
               I am a passionate and results-oriented Fullstack Developer with two years of hands-on experience in
-              building
-              full-stack web applications using the MEAN and MERN stacks. With an academic background in Information
-              Systems, I bring a strong understanding of both technology and business needs, enabling me to develop
-              solutions that are not only technically robust but also strategically aligned with user and organizational
-              goals.
+              building full-stack web applications using the MEAN and MERN stacks.
             </span>
           </div>
           <div class="about-button-container">
             <button class="glass about-button about-button-left">
               <i data-lucide="phone"></i>
-              <span>
-                Let's Talk
-              </span>
+              <span>Let's Talk</span>
             </button>
             <button class="glass about-button about-button-right">
               <i data-lucide="file-down"></i>
-              <span>
-                Download CV
-              </span>
+              <span>Download CV</span>
             </button>
           </div>
         </div>
       </section>
-      <section id="skills"></section>
+
+      <!-- SKILLS SECTION (SWIPER) -->
+      <section id="skills">
+        <div class="swiper">
+          <div class="swiper-wrapper">
+          </div>
+        </div>
+      </section>
+
       <section id="experiences"></section>
       <section id="projects"></section>
       <section id="contact"></section>
     </div>
   </div>
+
+  <!-- Main Script -->
   <script type="module" src="/src/main.ts"></script>
 </body>
 
