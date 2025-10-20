@@ -174,9 +174,9 @@ function initSwiper() {
     },
     speed: 3000,
     breakpoints: {
-      576: { slidesPerView: 3 },
-      768: { slidesPerView: 4 },
-      992: { slidesPerView: 5 },
+      576: { slidesPerView: 4 },
+      768: { slidesPerView: 5 },
+      992: { slidesPerView: 6 },
       1200: { slidesPerView: 7 },
     },
 
