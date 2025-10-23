@@ -23,9 +23,10 @@
     --glass-bg: 255 255 255;
     --glass-border: 255 255 255;
     --bg-gradient: radial-gradient(circle at 60% 60%,
-        #1e3a8a 0%,
-        #6366f1 40%,
-        #0f172a 100%);
+        #0a0a1a 0%,
+        #1e1b4b 40%,
+        #000000 100%);
+
   }
 
   html {
@@ -293,7 +294,7 @@
   }
 
   .about-button-right:hover {
-    @apply bg-black text-white;
+    @apply bg-red-700 text-white;
   }
 
   /* swiper */
@@ -306,11 +307,15 @@
   }
 
   .swiper-item {
-    @apply flex flex-col items-center gap-1;
+    @apply flex flex-col items-center gap-2;
   }
 
   .swiper-item-image-container {
-    @apply min-w-10 min-h-10 flex justify-center items-center rounded-xl md:rounded-2xl sm:min-w-15 sm:min-h-15 md:min-w-25 md:min-h-25 bg-white;
+    @apply transition duration-200 min-w-10 min-h-10 flex justify-center items-center rounded-xl md:rounded-2xl sm:min-w-15 sm:min-h-15 md:min-w-25 md:min-h-25 bg-white;
+  }
+
+  .swiper-item-image-container:hover {
+    @apply shadow-xl;
   }
 
   .swiper-item-image {
@@ -320,5 +325,14 @@
   .swiper-item-image-text {
     color: rgb(var(--text-color));
     @apply font-normal text-[10px] sm:text-xs md:text-sm;
+  }
+
+  #skills {
+    @apply flex flex-col gap-8 md:items-center;
+  }
+
+  .skills-title {
+    color: rgb(var(--text-color));
+    @apply text-3xl;
   }
 }
