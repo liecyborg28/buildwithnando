@@ -333,6 +333,6 @@
 
   .skills-title {
     color: rgb(var(--text-color));
-    @apply text-3xl;
+    @apply text-2xl md:text-3xl;
   }
 }
