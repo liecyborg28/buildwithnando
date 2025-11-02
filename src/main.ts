@@ -24,6 +24,7 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   initSwiper();
+  initExperiences();
 });
 
 const mode = localStorage.getItem("theme")
@@ -174,9 +175,9 @@ function initSwiper() {
     },
     speed: 3000,
     breakpoints: {
-      576: { slidesPerView: 4 },
-      768: { slidesPerView: 5 },
-      992: { slidesPerView: 6 },
+      576: { slidesPerView: 5 },
+      768: { slidesPerView: 6 },
+      992: { slidesPerView: 7 },
       1200: { slidesPerView: 7 },
     },
 
@@ -186,4 +187,77 @@ function initSwiper() {
   swiper.on("slideChange", () => {
     console.log("Slide active index:", swiper.activeIndex);
   });
+}
+
+function initExperiences() {
+  const experiences = [
+    {
+      position: "Front-End Developer",
+      place: "Kukerja",
+      period: "Jul 2022 - Jun 2024",
+      jobs: [
+        "Develop and maintain user-facing features based on design requirements",
+        "Collaborate with UI/UX designers to translate mockups into functional interfaces",
+        "Optimize applications for speed, performance, and scalability",
+        "Integrate frontend logic with backend APIs and services",
+        "Debug, troubleshoot, and fix interface and compatibility issues",
+      ],
+      skills: ["HTML", "CSS", "JavaScript", "TypeScript", "Angular", "Flutter"],
+    },
+    {
+      position: "Full Stack Developer",
+      place: "Build with Nando",
+      period: "Jan 2024 - Present",
+      jobs: [
+        "Build and maintain both frontend and backend systems",
+        "Design, implement, and manage databases",
+        "Develop and integrate APIs for client-server communication",
+        "Deploy, monitor, and maintain applications including basic DevOps tasks",
+        "Test, debug, and document applications to ensure performance and security",
+      ],
+      skills: [
+        "HTML",
+        "TailwindCSS",
+        "TypeScript",
+        "React",
+        "NextJS",
+        "ExpressJS",
+        "MongoDB",
+        "PostgreSQL",
+      ],
+    },
+  ];
+
+  const container = document.querySelector(".experiences-container");
+  let html = ``;
+
+  experiences.map((x) => {
+    html += `<div class="glass experience">
+            <div class="flex flex-col gap-3">
+              <div class="experience-heading">
+                <div class="flex flex-col">
+                  <span class="experience-position">${x.position}</span>
+                  <span class="experience-place">${x.place}</span>
+                </div>
+                <span class="experience-period">
+                  ${x.period}
+                </span>
+              </div>
+              <div>
+                <ul class="list-disc pl-4">
+                  ${x.jobs.map((y) => `<li class="mb-3">${y}</li>`).join("")}
+                </ul>
+              </div>
+            </div>
+            <div class="experience-footer">
+            ${x.skills
+              .map(
+                (y) => `<div class="glass experience-footer-item">${y}</div>`
+              )
+              .join("")}  
+            </div>
+          </div>`;
+  });
+
+  container.innerHTML = html;
 }

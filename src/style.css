@@ -7,6 +7,7 @@
     --font-family-primary: "Rubik", sans-serif;
     --font-family-secondary: "Urbanist", sans-serif;
     --text-color: 15 23 42;
+    --text-color-secondary: 22 101 52;
     --custom-bg-color: 255 255 255;
     --glass-bg: 15 23 42;
     --glass-border: 15 23 42;
@@ -19,6 +20,7 @@
 
   .dark {
     --text-color: 255 255 255;
+    --text-color-secondary: 34 197 94;
     --custom-bg-color: 15 23 42;
     --glass-bg: 255 255 255;
     --glass-border: 255 255 255;
@@ -30,19 +32,12 @@
 
   html {
     color-scheme: light dark;
-    /* font-family: */
     font-family: var(--font-family-primary);
-
     font-optical-sizing: auto;
     font-weight: normal;
     font-style: normal;
-
     background-color: var(--custom-bg-color);
-
     scrollbar-width: none;
-
-    /* tailwind CSS */
-    @apply scroll-smooth;
   }
 
   ::-webkit-scrollbar {
@@ -159,12 +154,14 @@
     background: var(--bg-gradient);
     background-size: 300% 300%;
     animation: gradient-move 10s ease infinite;
-    @apply w-screen h-screen flex flex-col;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    @apply w-screen h-screen flex flex-col items-center;
   }
 
   /* navbar */
   .navbar {
-    @apply flex items-center justify-between fixed w-[calc(100vw-32px)] rounded-2xl left-4 top-4 p-4 z-10;
+    @apply flex items-center justify-between fixed w-[calc(100vw-32px)] lg:w-[calc(100vw-256px)] rounded-2xl left-4 lg:left-32 top-4 p-4 z-10;
   }
 
   .navbar-profile {
@@ -247,7 +244,7 @@
 
   /* section */
   section {
-    @apply flex pt-27;
+    @apply flex pt-27 lg:w-[calc(100vw-256px)];
   }
 
   #about {
@@ -255,11 +252,11 @@
   }
 
   .about-avatar {
-    @apply min-w-50 min-h-50 rounded-2xl bg-cover bg-no-repeat bg-center bg-[url(/about/avatar.png)] overflow-hidden md:min-w-80 md:min-h-80 md:m-10 md:mr-5 lg:ml-40;
+    @apply min-w-50 min-h-50 rounded-2xl bg-cover bg-no-repeat bg-center bg-[url(/about/avatar.png)] overflow-hidden md:min-w-80 md:min-h-80 md:m-10 md:mr-5 lg:ml-20;
   }
 
   .about-properties {
-    @apply flex flex-col gap-5 items-center md:items-start md:m-10 md:ml-5 lg:mr-40;
+    @apply flex flex-col gap-5 items-center md:items-start md:m-10 md:ml-5 lg:mr-20;
   }
 
   .about-text {
@@ -297,7 +294,8 @@
   }
 
   #skills {
-    @apply flex flex-col gap-8 md:items-center;
+    /* md:items-center */
+    @apply flex flex-col gap-8;
   }
 
   .skills-title {
@@ -307,7 +305,7 @@
 
   /* swiper */
   .swiper {
-    @apply w-[calc(100vw-2rem)];
+    @apply w-[calc(100vw-2rem)] lg:w-[calc(100vw-256px)];
   }
 
   .swiper-slide {
@@ -333,6 +331,69 @@
   .swiper-item-image-text {
     color: rgb(var(--text-color));
     @apply font-normal text-[10px] sm:text-xs md:text-sm;
+  }
+
+  #experiences {
+    @apply flex flex-col gap-8;
+  }
+
+  .experiences-title {
+    color: rgb(var(--text-color));
+    @apply text-2xl md:text-3xl lg:text-4xl font-bold;
+  }
+
+  .experiences-container {
+    @apply flex flex-col gap-5;
+  }
+
+  .experience {
+    @apply flex flex-col rounded-2xl p-4 gap-3;
+  }
+
+  .experience-heading {
+    @apply flex flex-col gap-3 md:flex-row md:items-center md:justify-between;
+  }
+
+  .experience-position {
+    color: rgb(var(--text-color));
+    @apply text-xl font-semibold;
+  }
+
+  .experience-place {
+    color: rgb(var(--text-color-secondary));
+    @apply text-xs md:text-sm;
+  }
+
+  .experience-period {
+    color: rgb(var(--text-color));
+    @apply text-xs md:text-sm;
+  }
+
+  li {
+    color: rgb(var(--text-color));
+    @apply text-sm;
+  }
+
+  .experience-footer {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .experience-footer-item {
+    color: rgb(var(--text-color));
+    @apply flex py-1 px-2 rounded-4xl justify-center items-center text-xs md:text-sm;
+  }
+
+  #projects {
+    @apply flex flex-col gap-8;
+  }
+
+  .projects-title {
+    color: rgb(var(--text-color));
+    @apply text-2xl md:text-3xl lg:text-4xl font-bold;
+  }
+
+  .projects-container {
+    @apply flex flex-wrap;
   }
 
   #contact {
