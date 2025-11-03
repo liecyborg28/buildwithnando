@@ -1,7 +1,7 @@
 // @ts-nocheck
 declare const lucide: any;
 
-window.addEventListener("DOMContentLoaded", () => {
+function createIcons() {
   lucide.createIcons({
     attrs: {
       width: 24,
@@ -10,6 +10,10 @@ window.addEventListener("DOMContentLoaded", () => {
       "stroke-width": 2,
     },
   });
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  createIcons();
 
   if (mode === "light") {
     html.classList.remove("dark");
@@ -270,9 +274,24 @@ function initProjects() {
       ],
       title: "General POS",
       desc: "A modern multi-business POS application with smart inventory control and seamless sales management designed to simplify business operations.",
-      techs: ["HTML", "SCSS", "TypeScript", "Angular"],
-      github: "",
+      techs: ["HTML", "SCSS", "TypeScript", "Angular", "ExpressJS", "MongoDB"],
       demo: "https://general-pos-fe.vercel.app",
+    },
+    {
+      images: ["/projects/2/1.png", "/projects/2/2.png", "/projects/2/3.png"],
+      title: "Articless",
+      desc: "An AI-powered tool for fast, accurate paraphrasing and text summarization to improve writing efficiency.",
+      techs: ["TailwindCSS", "TypeScript", "NextJS", "PostgreSQL", "Supabase"],
+      repo: "https://github.com/liecyborg28/articless",
+      demo: "https://articless.vercel.app",
+    },
+    {
+      images: ["/projects/3/1.png"],
+      title: "Plantask",
+      desc: "Smart minimal task manager with AI that suggests tasks based on your list title. Perfect for fast and focused planning.",
+      techs: ["TailwindCSS", "TypeScript", "NextJS"],
+      repo: "https://github.com/liecyborg28/plantask",
+      demo: "https://myplantask.vercel.app",
     },
   ];
 
@@ -300,6 +319,7 @@ function initProjects() {
             <span class="project-title">
               ${x.title}
             </span>
+
             <p class="project-desc">
               ${x.desc}
             </p>
@@ -309,12 +329,22 @@ function initProjects() {
                 .join("")}
             </div>
             <div class="project-footer">
-              <div class="project-footer-item"><i data-lucide="github" class="scale-60"></i> View on Github</div>
-              <div class="project-footer-item"><i data-lucide="external-link" class="scale-60"></i> Visit Demo</div>
+              <a target="${x.repo ? "_blank" : ""}" href="${
+        x.repo || ""
+      }" class="${
+        x.repo ? "project-footer-item" : "project-footer-item-disable"
+      }"><i data-lucide="github" class="scale-60"></i> ${
+        x.repo ? "See Repository" : "Private Repository"
+      }</a>
+              <a target="${x.demo ? "_blank" : ""}" href="${
+        x.demo || ""
+      }" class="project-footer-item"><i data-lucide="external-link" class="scale-60"></i> Visit Demo</a>
             </div>
           </div>`;
     })
     .join("");
+
+  createIcons();
 
   const swiper = new Swiper(".project-swiper", {
     effect: "coverflow",
