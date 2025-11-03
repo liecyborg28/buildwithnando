@@ -8,6 +8,7 @@
     --font-family-secondary: "Urbanist", sans-serif;
     --text-color: 15 23 42;
     --text-color-secondary: 22 101 52;
+    --text-color-tertiary: 29 78 216;
     --custom-bg-color: 255 255 255;
     --glass-bg: 15 23 42;
     --glass-border: 15 23 42;
@@ -21,6 +22,7 @@
   .dark {
     --text-color: 255 255 255;
     --text-color-secondary: 34 197 94;
+    --text-color-tertiary: 59 130 346;
     --custom-bg-color: 15 23 42;
     --glass-bg: 255 255 255;
     --glass-border: 255 255 255;
@@ -304,8 +306,8 @@
   }
 
   /* swiper */
-  .swiper {
-    @apply w-[calc(100vw-2rem)] lg:w-[calc(100vw-256px)];
+  .skills-swiper {
+    @apply w-[calc(100vw-2rem)] lg:w-[calc(100vw-256px)] overflow-hidden;
   }
 
   .swiper-slide {
@@ -387,13 +389,53 @@
     @apply flex flex-col gap-8;
   }
 
+  .project-swiper {
+    @apply w-full overflow-visible;
+  }
+
+  .project-slide {
+    @apply flex justify-center items-center min-h-50 rounded-xl overflow-hidden;
+  }
+
   .projects-title {
     color: rgb(var(--text-color));
     @apply text-2xl md:text-3xl lg:text-4xl font-bold;
   }
 
   .projects-container {
-    @apply flex flex-wrap;
+    @apply flex gap-4 flex-wrap justify-center;
+  }
+
+  .project {
+    @apply flex flex-col flex-1 rounded-2xl p-4 min-w-xs max-w-lg mb-4;
+  }
+
+  .project-title {
+    color: rgb(var(--text-color));
+    @apply text-lg md:text-xl lg:text-2xl font-bold pt-1;
+  }
+
+  .project-desc {
+    color: rgb(var(--text-color));
+    @apply text-xs md:text-sm pb-4 pt-2;
+  }
+
+  .techs {
+    @apply flex flex-wrap gap-2 pb-4;
+  }
+
+  .tech {
+    color: rgb(var(--text-color));
+    @apply flex py-1 px-2 rounded-4xl justify-center items-center text-xs md:text-sm;
+  }
+
+  .project-footer {
+    @apply flex gap-4;
+  }
+
+  .project-footer-item {
+    color: rgb(var(--text-color-tertiary));
+    @apply flex justify-center items-center text-sm cursor-pointer;
   }
 
   #contact {
@@ -419,13 +461,17 @@
     @apply flex gap-2 justify-center cursor-pointer;
   }
 
+  .contact-item:hover {
+    @apply underline;
+  }
+
   #footer {
     color: rgb(var(--text-color));
-    @apply flex flex-col items-center py-10 border-t gap-3;
+    @apply flex flex-col items-center py-5 border-t gap-3;
   }
 
   .footer-list {
-    @apply flex gap-5 cursor-pointer;
+    @apply flex gap-1 cursor-pointer;
   }
 
   @keyframes flutter-pulse {

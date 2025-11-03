@@ -23,8 +23,9 @@ window.addEventListener("DOMContentLoaded", () => {
     moon.classList.remove("hidden");
   }
 
-  initSwiper();
+  initSkills();
   initExperiences();
+  initProjects();
 });
 
 const mode = localStorage.getItem("theme")
@@ -67,7 +68,7 @@ closeDrawer.addEventListener("click", () => {
   drawer.classList.remove("show");
 });
 
-function initSwiper() {
+function initSkills() {
   const SwiperGlobal = (window as any).Swiper;
   if (!SwiperGlobal) {
     console.error("Swiper belum dimuat dari CDN!");
@@ -161,7 +162,7 @@ function initSwiper() {
             </div>`
   );
 
-  const swiper = new SwiperGlobal(".swiper", {
+  const swiper = new Swiper(".skills-swiper", {
     slidesPerView: 6,
     spaceBetween: 0,
     grabCursor: true,
@@ -181,11 +182,7 @@ function initSwiper() {
       1200: { slidesPerView: 7 },
     },
 
-    // effect: "slide",
-  });
-
-  swiper.on("slideChange", () => {
-    console.log("Slide active index:", swiper.activeIndex);
+    effect: "slide",
   });
 }
 
@@ -205,7 +202,7 @@ function initExperiences() {
       skills: ["HTML", "CSS", "JavaScript", "TypeScript", "Angular", "Flutter"],
     },
     {
-      position: "Full Stack Developer",
+      position: "Fullstack Developer",
       place: "Build with Nando",
       period: "Jan 2024 - Present",
       jobs: [
@@ -229,10 +226,10 @@ function initExperiences() {
   ];
 
   const container = document.querySelector(".experiences-container");
-  let html = ``;
 
-  experiences.map((x) => {
-    html += `<div class="glass experience">
+  container.innerHTML = experiences
+    .map((x) => {
+      return `<div class="glass experience">
             <div class="flex flex-col gap-3">
               <div class="experience-heading">
                 <div class="flex flex-col">
@@ -257,7 +254,88 @@ function initExperiences() {
               .join("")}  
             </div>
           </div>`;
-  });
+    })
+    .join("");
+}
 
-  container.innerHTML = html;
+function initProjects() {
+  const projects = [
+    {
+      images: [
+        "/projects/1/1.png",
+        "/projects/1/2.png",
+        "/projects/1/3.png",
+        "/projects/1/4.png",
+        "/projects/1/5.png",
+      ],
+      title: "General POS",
+      desc: "A modern multi-business POS application with smart inventory control and seamless sales management designed to simplify business operations.",
+      techs: ["HTML", "SCSS", "TypeScript", "Angular"],
+      github: "",
+      demo: "https://general-pos-fe.vercel.app",
+    },
+  ];
+
+  const container = document.querySelector(".projects-container");
+
+  container.innerHTML = projects
+    .map((x, i) => {
+      return `<div class="glass project">
+            <div class="swiper project-swiper">
+              <div class="swiper-wrapper">
+              ${x.images
+                .map(
+                  (y, j) =>
+                    `<div class="glass swiper-slide project-slide">
+                    <img src="${y}" alt="project ${i + 1}, slide ${
+                      j + 1
+                    }" srcset="">
+                  </div>`
+                )
+                .join("")}
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+
+            <span class="project-title">
+              ${x.title}
+            </span>
+            <p class="project-desc">
+              ${x.desc}
+            </p>
+            <div class="techs">
+              ${x.techs
+                .map((y) => `<div class="glass tech">${y}</div>`)
+                .join("")}
+            </div>
+            <div class="project-footer">
+              <div class="project-footer-item"><i data-lucide="github" class="scale-60"></i> View on Github</div>
+              <div class="project-footer-item"><i data-lucide="external-link" class="scale-60"></i> Visit Demo</div>
+            </div>
+          </div>`;
+    })
+    .join("");
+
+  const swiper = new Swiper(".project-swiper", {
+    effect: "coverflow",
+    centeredSlides: true,
+    grabCursor: true,
+    slidesPerView: "auto",
+    loop: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    coverflowEffect: {
+      rotate: 50,
+      stretch: 0,
+      depth: 120,
+      modifier: 1,
+      slideShadows: true,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+  });
 }
