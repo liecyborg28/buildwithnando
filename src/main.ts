@@ -278,20 +278,20 @@ function initProjects() {
       demo: "https://general-pos-fe.vercel.app",
     },
     {
-      images: ["/projects/2/1.png", "/projects/2/2.png", "/projects/2/3.png"],
-      title: "Articless",
-      desc: "An AI-powered tool for fast, accurate paraphrasing and text summarization to improve writing efficiency.",
-      techs: ["TailwindCSS", "TypeScript", "NextJS", "PostgreSQL", "Supabase"],
-      repo: "https://github.com/liecyborg28/articless",
-      demo: "https://articless.vercel.app",
-    },
-    {
       images: ["/projects/3/1.png"],
       title: "Plantask",
       desc: "Smart minimal task manager with AI that suggests tasks based on your list title. Perfect for fast and focused planning.",
       techs: ["TailwindCSS", "TypeScript", "NextJS"],
       repo: "https://github.com/liecyborg28/plantask",
       demo: "https://myplantask.vercel.app",
+    },
+    {
+      images: ["/projects/2/1.png", "/projects/2/2.png", "/projects/2/3.png"],
+      title: "Articless",
+      desc: "An AI-powered tool for fast, accurate paraphrasing and text summarization to improve writing efficiency.",
+      techs: ["TailwindCSS", "TypeScript", "NextJS", "PostgreSQL", "Supabase"],
+      repo: "https://github.com/liecyborg28/articless",
+      demo: "https://articless.vercel.app",
     },
   ];
 
