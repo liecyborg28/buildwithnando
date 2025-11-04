@@ -246,7 +246,7 @@
 
   /* section */
   section {
-    @apply flex pt-27 lg:w-[calc(100vw-256px)];
+    @apply flex pt-30 lg:w-[calc(100vw-256px)];
   }
 
   #about {
