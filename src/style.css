@@ -32,7 +32,10 @@
         #000000 100%);
   }
 
-  html {
+  html,
+  body {
+    background: var(--bg-gradient);
+    background-size: 300% 300%;
     color-scheme: light dark;
     font-family: var(--font-family-primary);
     font-optical-sizing: auto;
@@ -154,10 +157,7 @@
   }
 
   .app-container {
-    background: var(--bg-gradient);
-    background-size: 300% 300%;
     animation: gradient-move 10s ease infinite;
-    overflow-y: scroll;
     @apply w-screen h-screen flex flex-col items-center;
   }
 
@@ -241,12 +241,12 @@
   .content {
     height: calc(100vh - 16px);
     max-height: calc(100vh - 16px);
-    @apply mt-4 mx-4 overflow-auto flex flex-col min-w-min rounded-t-2xl;
+    @apply mt-4 mx-4 flex flex-col min-w-min rounded-t-2xl;
   }
 
   /* section */
   section {
-    @apply flex pt-30 lg:w-[calc(100vw-256px)];
+    @apply flex pt-27 pb-7 lg:w-[calc(100vw-256px)];
   }
 
   #about {
