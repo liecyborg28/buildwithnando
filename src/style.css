@@ -217,11 +217,11 @@
 
   /* drawer */
   .drawer {
-    @apply flex flex-col w-[50vw] sm:w-[40vw] md:w-[20vw] h-[calc(80vh)] md:hidden fixed rounded-2xl right-4 top-27 duration-500 -z-10;
+    @apply flex flex-col w-[50vw] sm:w-[40vw] md:w-[20vw] h-[calc(80vh)] md:hidden fixed rounded-2xl right-4 top-27 duration-500 -z-10 opacity-0;
   }
 
   .show {
-    @apply z-10;
+    @apply z-10 opacity-100;
   }
 
   .drawer-link {
