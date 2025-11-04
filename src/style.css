@@ -34,6 +34,7 @@
 
   html,
   body {
+    animation: gradient-move 10s ease infinite;
     background: var(--bg-gradient);
     background-size: 300% 300%;
     color-scheme: light dark;
@@ -44,10 +45,6 @@
     background-color: var(--custom-bg-color);
     scrollbar-width: none;
     scroll-behavior: smooth;
-  }
-
-  body {
-    animation: gradient-move 10s ease infinite;
   }
 
   ::-webkit-scrollbar {
