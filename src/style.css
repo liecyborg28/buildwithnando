@@ -390,11 +390,11 @@
   }
 
   .project-swiper {
-    @apply w-full overflow-visible;
+    @apply w-full overflow-hidden flex items-center;
   }
 
   .project-slide {
-    @apply flex justify-center items-center min-h-50 rounded-xl overflow-hidden;
+    @apply flex justify-center items-center w-full rounded-xl overflow-hidden;
   }
 
   .projects-title {
@@ -480,6 +480,10 @@
 
   .footer-list {
     @apply flex gap-1 cursor-pointer;
+  }
+
+  .footer-desc {
+    @apply text-center;
   }
 
   @keyframes flutter-pulse {
