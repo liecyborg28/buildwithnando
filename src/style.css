@@ -46,6 +46,10 @@
     scroll-behavior: smooth;
   }
 
+  body {
+    animation: gradient-move 10s ease infinite;
+  }
+
   ::-webkit-scrollbar {
     display: none;
   }
@@ -157,7 +161,6 @@
   }
 
   .app-container {
-    animation: gradient-move 10s ease infinite;
     @apply w-screen h-screen flex flex-col items-center;
   }
 
