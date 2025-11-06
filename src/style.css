@@ -295,46 +295,6 @@
     @apply bg-red-700 text-white;
   }
 
-  #skills {
-    /* md:items-center */
-    @apply flex flex-col gap-8;
-  }
-
-  .skills-title {
-    color: rgb(var(--text-color));
-    @apply text-2xl md:text-3xl lg:text-4xl font-bold;
-  }
-
-  /* swiper */
-  .skills-swiper {
-    @apply w-[calc(100vw-2rem)] lg:w-[calc(100vw-256px)] overflow-hidden;
-  }
-
-  .swiper-slide {
-    @apply flex justify-center items-center;
-  }
-
-  .swiper-item {
-    @apply flex flex-col items-center gap-2;
-  }
-
-  .swiper-item-image-container {
-    @apply transition duration-200 min-w-10 min-h-10 flex justify-center items-center rounded-xl md:rounded-2xl sm:min-w-15 sm:min-h-15 md:min-w-25 md:min-h-25 bg-white;
-  }
-
-  .swiper-item-image-container:hover {
-    @apply shadow-xl;
-  }
-
-  .swiper-item-image {
-    @apply w-5 h-5 sm:w-10 sm:h-10 md:w-15 md:h-15;
-  }
-
-  .swiper-item-image-text {
-    color: rgb(var(--text-color));
-    @apply font-normal text-[10px] sm:text-xs md:text-sm;
-  }
-
   #experiences {
     @apply flex flex-col gap-8;
   }
