@@ -160,7 +160,7 @@ function initSkills() {
       `<div class="swiper-item">
               <div class="glass swiper-item-image-container">
                 <img src="${e.image}"
-                  class="swiper-item-image" alt="skill image">
+                  class="swiper-item-image" alt="skill image"/>
               </div>
               <span class="swiper-item-image-text">${e.name}</span>
             </div>`
