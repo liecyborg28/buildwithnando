@@ -289,9 +289,34 @@ function initProjects() {
       images: ["/projects/2/1.png", "/projects/2/2.png", "/projects/2/3.png"],
       title: "Articless",
       desc: "An AI-powered tool for fast, accurate paraphrasing and text summarization to improve writing efficiency.",
-      techs: ["TailwindCSS", "TypeScript", "NextJS", "PostgreSQL", "Supabase"],
+      techs: [
+        "TailwindCSS",
+        "TypeScript",
+        "NextJS",
+        "PostgreSQL",
+        "Supabase",
+        "ChakraUI",
+      ],
       repo: "https://github.com/liecyborg28/articless",
       demo: "https://articless.vercel.app",
+    },
+    {
+      images: [
+        "/projects/4/1.png",
+        "/projects/4/2.png",
+        "/projects/4/3.png",
+        "/projects/4/4.png",
+      ],
+      title: "Report Flow",
+      desc: "Report Flow helps you write, format, and send your reports automatically — powered by AI and delivered right on schedule.",
+      techs: [
+        "TailwindCSS",
+        "TypeScript",
+        "NextJS",
+        "n8n",
+        "Google Sheets API",
+        "Telegram Bot API",
+      ],
     },
   ];
 
