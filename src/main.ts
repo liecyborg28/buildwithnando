@@ -317,6 +317,8 @@ function initProjects() {
         "Google Sheets API",
         "Telegram Bot API",
       ],
+      repo: "https://github.com/liecyborg28/report-flow",
+      demo: "https://report-flow.netlify.app",
     },
   ];
 
