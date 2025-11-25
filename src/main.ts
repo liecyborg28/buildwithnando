@@ -315,7 +315,6 @@ function initProjects() {
         "NextJS",
         "Supabase",
         "ExpressJS",
-        "NodeJS",
         "PostgresSQL",
       ],
       repo: "https://github.com/liecyborg28/cleveresu",
