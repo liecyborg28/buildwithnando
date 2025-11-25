@@ -308,7 +308,7 @@ function initProjects() {
         "/projects/5/4.png",
       ],
       title: "Cleveresu",
-      desc: "CleveResu helps you create a clean, modern, and ATS-friendly CV",
+      desc: "Cleveresu is an intelligent CV generator designed to help you create polished, ATS-friendly resumes with ease.",
       techs: ["TailwindCSS", "TypeScript", "NextJS", "Supabase"],
       repo: "https://github.com/liecyborg28/cleveresu",
       demo: "https://cleveresu.vercel.app",
