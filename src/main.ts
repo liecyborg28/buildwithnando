@@ -310,6 +310,8 @@ function initProjects() {
       title: "Cleveresu",
       desc: "CleveResu helps you create a clean, modern, and ATS-friendly CV",
       techs: ["TailwindCSS", "TypeScript", "NextJS", "Supabase"],
+      repo: "https://github.com/liecyborg28/cleveresu",
+      demo: "https://cleveresu.vercel.app",
     },
     {
       images: [
@@ -328,8 +330,8 @@ function initProjects() {
         "Google Sheets API",
         "Telegram Bot API",
       ],
-      repo: "https://github.com/liecyborg28/cleveresu",
-      demo: "https://cleveresu.vercel.app",
+      repo: "https://github.com/liecyborg28/report-flow",
+      demo: "https://report-flow.netlify.app",
     },
   ];
 
