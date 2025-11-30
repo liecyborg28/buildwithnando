@@ -155,6 +155,11 @@ function initSkills() {
       image:
         "https://img.icons8.com/?size=100&id=JRnxU7ZWP4mi&format=png&color=000000",
     },
+    {
+      name: "Docker",
+      image:
+        "https://img.icons8.com/?size=100&id=cdYUlRaag9G9&format=png&color=000000",
+    },
   ].map(
     (e) =>
       `<div class="swiper-item">
