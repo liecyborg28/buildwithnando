@@ -276,6 +276,7 @@ function initProjects() {
         "/projects/1/3.png",
         "/projects/1/4.png",
         "/projects/1/5.png",
+        "/projects/1/6.png",
       ],
       title: "General POS",
       desc: "A modern multi-business POS application with smart inventory control and seamless sales management designed to simplify business operations.",
@@ -291,7 +292,12 @@ function initProjects() {
       demo: "https://myplantask.vercel.app",
     },
     {
-      images: ["/projects/2/1.png", "/projects/2/2.png", "/projects/2/3.png"],
+      images: [
+        "/projects/2/1.png",
+        "/projects/2/2.png",
+        "/projects/2/3.png",
+        "/projects/2/4.png",
+      ],
       title: "Articless",
       desc: "An AI-powered tool for fast, accurate paraphrasing and text summarization to improve writing efficiency.",
       techs: [
@@ -310,6 +316,7 @@ function initProjects() {
         "/projects/5/1.png",
         "/projects/5/2.png",
         "/projects/5/3.png",
+        "/projects/5/4.png",
         "/projects/5/4.png",
       ],
       title: "Cleveresu",
