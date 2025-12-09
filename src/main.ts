@@ -294,9 +294,9 @@ function initProjects() {
     {
       images: [
         "/projects/2/1.png",
+        "/projects/2/4.png",
         "/projects/2/2.png",
         "/projects/2/3.png",
-        "/projects/2/4.png",
       ],
       title: "Articless",
       desc: "An AI-powered tool for fast, accurate paraphrasing and text summarization to improve writing efficiency.",
@@ -317,7 +317,7 @@ function initProjects() {
         "/projects/5/2.png",
         "/projects/5/3.png",
         "/projects/5/4.png",
-        "/projects/5/4.png",
+        "/projects/5/5.png",
       ],
       title: "Cleveresu",
       desc: "Cleveresu is an intelligent CV generator designed to help you create polished, ATS-friendly resumes with ease.",
