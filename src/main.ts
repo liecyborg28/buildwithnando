@@ -198,17 +198,44 @@ function initSkills() {
 function initExperiences() {
   const experiences = [
     {
-      position: "Front-End Developer",
-      place: "Kukerja",
-      period: "Jul 2022 - Jun 2024",
+      position: "AI Native Engineer",
+      place: "PT. eBdesk Teknologi",
+      period: "Jun 2026 - Present",
       jobs: [
-        "Develop and maintain user-facing features based on design requirements",
-        "Collaborate with UI/UX designers to translate mockups into functional interfaces",
-        "Optimize applications for speed, performance, and scalability",
-        "Integrate frontend logic with backend APIs and services",
-        "Debug, troubleshoot, and fix interface and compatibility issues",
+        "Developed and maintained AI-powered web applications using ReactJS for the frontend and FastAPI for backend services",
+        "Designed and implemented RESTful APIs to support AI workflows, data processing pipelines, and real-time application features",
+        "Integrated Large Language Models (LLMs), AI agents, and external AI services into enterprise applications to enhance automation and user experience",
+        "Collaborated with cross-functional teams to translate business requirements into scalable, secure, and high-performance AI-native solutions",
+        "Optimized application performance, API reliability, and deployment processes through code refactoring, testing, and continuous integration practices",
       ],
-      skills: ["HTML", "CSS", "JavaScript", "TypeScript", "Angular", "Flutter"],
+      skills: [
+        "ReactJS",
+        "FastAPI",
+        "RESTful API",
+        "LLMs",
+        "AI Agents",
+        "CI/CD",
+      ],
+    },
+    {
+      position: "Full-Stack Developer",
+      place: "PT. eBdesk Teknologi",
+      period: "Jan 2026 - Jun 2026",
+      jobs: [
+        "Developed and maintained end-to-end web applications using ReactJS for frontend development and FastAPI for backend services",
+        "Designed and implemented RESTful APIs, authentication mechanisms, and database integrations to support business requirements",
+        "Built responsive and user-friendly interfaces while ensuring optimal application performance across devices",
+        "Collaborated with product owners, designers, and fellow developers to deliver scalable and maintainable software solutions",
+        "Performed debugging, testing, code reviews, and system optimization to improve application reliability and user experience",
+      ],
+      skills: [
+        "ReactJS",
+        "FastAPI",
+        "RESTful API",
+        "MongoDB",
+        "PostgreSQL",
+        "JWT",
+      ],
     },
     {
       position: "Fullstack Developer",
@@ -231,6 +258,19 @@ function initExperiences() {
         "MongoDB",
         "PostgreSQL",
       ],
+    },
+    {
+      position: "Front-End Developer",
+      place: "Kukerja",
+      period: "Jul 2022 - Jun 2024",
+      jobs: [
+        "Develop and maintain user-facing features based on design requirements",
+        "Collaborate with UI/UX designers to translate mockups into functional interfaces",
+        "Optimize applications for speed, performance, and scalability",
+        "Integrate frontend logic with backend APIs and services",
+        "Debug, troubleshoot, and fix interface and compatibility issues",
+      ],
+      skills: ["HTML", "CSS", "JavaScript", "TypeScript", "Angular", "Flutter"],
     },
   ];
 
