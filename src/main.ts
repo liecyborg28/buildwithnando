@@ -160,6 +160,21 @@ function initSkills() {
       image:
         "https://img.icons8.com/?size=100&id=cdYUlRaag9G9&format=png&color=000000",
     },
+    {
+      name: "Golang",
+      image:
+        "https://img.icons8.com/color/100/golang.png",
+    },
+    {
+      name: "FastAPI",
+      image:
+        "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg",
+    },
+    {
+      name: "Python",
+      image:
+        "https://img.icons8.com/color/100/python.png",
+    },
   ].map(
     (e) =>
       `<div class="swiper-item">
