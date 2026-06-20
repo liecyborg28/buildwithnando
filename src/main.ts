@@ -238,6 +238,25 @@ function initExperiences() {
       ],
     },
     {
+      position: "Software Engineer",
+      place: "Script Smelter Studios",
+      period: "Jan 2026 - Mar 2026",
+      jobs: [
+        "Developed and maintained an MCP server used for structured and efficient web scraping processes",
+        "Designed scraping architectures to automatically and periodically collect data from various sources",
+        "Implemented data parsing and transformation logic to ensure scraped data meets system requirements",
+        "Optimized server performance and stability to handle large-scale scraping operations",
+        "Monitored, debugged, and continuously improved scraping processes and server infrastructure",
+      ],
+      skills: [
+        "MCP Server",
+        "Web Scraping",
+        "Data Parsing",
+        "System Architecture",
+        "Performance Optimization",
+      ],
+    },
+    {
       position: "Fullstack Developer",
       place: "Build with Nando",
       period: "Jan 2024 - Present",
