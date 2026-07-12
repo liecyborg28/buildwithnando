@@ -454,7 +454,12 @@
     stroke-dasharray: 6 8;
   }
 
-  .mission-rocket text {
+  .mission-rocket {
+    fill: none;
+    stroke: rgb(var(--accent-2));
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
     filter: drop-shadow(0 0 6px rgb(var(--accent-2) / 0.8));
   }
 
@@ -555,14 +560,19 @@
 
   .rocket-mobile {
     position: absolute;
-    top: -9px;
+    top: -8px;
     left: 50%;
-    /* clockwise orbit → at the top the rocket travels right; the emoji
-       points NE, so +45deg aims it along the flight path */
+    /* clockwise orbit → at the top the rocket travels right; the lucide
+       rocket points NE, so +45deg aims it along the flight path */
     transform: translateX(-50%) rotate(45deg);
-    font-size: 16px;
+    color: rgb(var(--accent-2));
     line-height: 1;
     filter: drop-shadow(0 0 6px rgb(var(--accent-2) / 0.8));
+  }
+
+  .rocket-mobile svg {
+    width: 16px;
+    height: 16px;
   }
 
   /* mobile: drop the figure-8 (path + home planet) and let the rocket
