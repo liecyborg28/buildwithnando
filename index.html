@@ -16,7 +16,6 @@
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://buildwithnando.vercel.app" />
 
-
   <link rel="stylesheet" href="./src/style.css" />
   <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -28,147 +27,239 @@
 </head>
 
 <body>
-  <div id="app" class="app-container">
-    <!-- NAVBAR -->
-    <nav class="navbar glass">
-      <div class="navbar-profile">
-        <div class="navbar-profile-avatar">
-          <span class="navbar-profile-avatar-text font-family-mono">FL</span>
-        </div>
-        <span class="navbar-profile-title glow-text glow-text-animate font-family-mono">
-          &lt;fernando.lie /&gt;
-        </span>
-      </div>
+  <!-- SPACE FX -->
+  <span class="shooting-star"></span>
+  <span class="shooting-star star-2"></span>
+  <span class="shooting-star star-3"></span>
 
-      <div class="navbar-link">
-        <a href="#about"><span class="navbar-link-item"><span class="nav-num">01.</span>About</span></a>
-        <a href="#skills"><span class="navbar-link-item"><span class="nav-num">02.</span>Skills</span></a>
-        <a href="#experiences"><span class="navbar-link-item"><span class="nav-num">03.</span>Experiences</span></a>
-        <a href="#projects"><span class="navbar-link-item"><span class="nav-num">04.</span>Projects</span></a>
-        <a href="#contact"><span class="navbar-link-item"><span class="nav-num">05.</span>Contact</span></a>
+  <!-- NAVBAR -->
+  <header class="site-nav glass">
+    <a href="#home" class="nav-logo font-family-mono">&lt;FL /&gt;</a>
 
-        <div class="navbar-link-switch-mode glass">
-          <div class="navbar-link-switch-mode-indicator glass">
-            <span class="light-icon hidden">
-              <i class="text-amber-300 fill-amber-300" data-lucide="sun-dim"></i>
-            </span>
-            <span class="dark-icon">
-              <i class="fill-slate-600 stroke-0" data-lucide="moon"></i>
-            </span>
-          </div>
-        </div>
-
-        <span class="navbar-link-icon">
-          <i data-lucide="menu"></i>
-        </span>
-      </div>
+    <nav class="nav-links">
+      <a class="nav-link" href="#about"><span class="nav-num">01</span>About</a>
+      <a class="nav-link" href="#skills"><span class="nav-num">02</span>Skills</a>
+      <a class="nav-link" href="#experience"><span class="nav-num">03</span>Experience</a>
+      <a class="nav-link" href="#projects"><span class="nav-num">04</span>Projects</a>
+      <a class="nav-link" href="#contact"><span class="nav-num">05</span>Contact</a>
     </nav>
 
-    <!-- DRAWER -->
-    <nav class="drawer glass">
-      <div class="drawer-link">
-        <span class="close-drawer">
-          <i class="cursor-pointer" data-lucide="x"></i>
-        </span>
-        <span class="drawer-link-item font-family-mono"><a href="#about"><span class="nav-num">01.</span>About</a></span>
-        <span class="drawer-link-item font-family-mono"><a href="#skills"><span class="nav-num">02.</span>Skills</a></span>
-        <span class="drawer-link-item font-family-mono"><a href="#experiences"><span class="nav-num">03.</span>Experiences</a></span>
-        <span class="drawer-link-item font-family-mono"><a href="#projects"><span class="nav-num">04.</span>Projects</a></span>
-        <span class="drawer-link-item font-family-mono"><a href="#contact"><span class="nav-num">05.</span>Contact</a></span>
-      </div>
-    </nav>
-
-    <!-- CONTENT -->
-    <div class="content">
-      <section id="about">
-        <div class="about-avatar glass hud"></div>
-        <div class="about-properties">
-          <div class="about-text glass hud">
-            <div class="terminal-bar">
-              <span class="terminal-dot dot-red"></span>
-              <span class="terminal-dot dot-yellow"></span>
-              <span class="terminal-dot dot-green"></span>
-              <span class="terminal-path font-family-mono">nando@buildwithnando: ~</span>
-            </div>
-            <span class="terminal-cmd font-family-mono"><span class="terminal-prompt">$</span> whoami</span>
-            <span class="about-text-title">Hi, I'm <span class="title-accent">Nando</span></span>
-            <span class="about-text-role font-family-mono">&gt; <span class="typed-role">Software Engineer</span><span
-                class="typed-cursor">▍</span></span>
-            <span class="about-text-desc">
-              Software engineer focused on building fullstack web applications and AI-powered systems.
-              Two+ years of hands-on experience shipping products with the MERN &amp; MEAN stacks,
-              FastAPI, and LLM integrations.
-            </span>
-            <div class="hero-status font-family-mono">
-              <span class="status-dot"></span>
-              <span>open_to_work&nbsp;=&nbsp;<span class="status-true">true</span></span>
-            </div>
-          </div>
-          <div class="about-button-container">
-            <a href="https://wa.me/6285250621375" class="glass about-button about-button-left">
-              <i data-lucide="terminal"></i>
-              <span class="font-family-mono">./lets-talk</span>
-            </a>
-            <a href="/about/cv.pdf" class="glass about-button about-button-right">
-              <i data-lucide="file-down"></i>
-              <span class="font-family-mono">./download-cv</span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- SKILLS SECTION (SWIPER) -->
-      <section id="skills">
-        <span class="skills-title section-title">Tech &amp; Tools I Use</span>
-        <div class="skills-swiper">
-          <div class="swiper-wrapper">
-          </div>
-        </div>
-      </section>
-
-      <section id="experiences">
-        <span class="experiences-title section-title">Work Experiences</span>
-        <div class="experiences-container">
-        </div>
-      </section>
-
-      <section id="projects">
-        <span class="projects-title section-title">My Projects</span>
-        <div class="projects-container"></div>
-      </section>
-
-      <section id="contact">
-        <span class="contact-title section-title">Let's build something together</span>
-        <p class="contact-desc">Feel free to reach out if you're looking for an engineer, have a question, or
-          just want to connect.</p>
-        <div class="contact-list">
-          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=buildwithnando@gmail.com&su=Collaboration%20Opportunity&body=Hello,%0A%0AI%20hope%20you're%20doing%20well.%20I%20would%20like%20to%20explore%20a%20potential%20collaboration%20opportunity%20with%20you.%20Please%20let%20me%20know%20if%20you're%20available%20to%20discuss%20further.%0A%0AThank%20you!"
-            class="contact-item glass">
-            <i data-lucide="mail"></i>
-            <span class="font-family-mono">buildwithnando@gmail.com</span>
-          </a>
-          <a href="https://wa.me/6285250621375" class="contact-item glass">
-            <i data-lucide="phone"></i>
-            <span class="font-family-mono">+62-852-506-213-75</span>
-          </a>
-        </div>
-      </section>
-      <section id="footer">
-        <span class="footer-desc font-family-mono">
-          <span class="footer-comment">/* © 2025 Designed and coded with <span class="flutter-pulse">❤️</span> by
-            Fernando Lie */</span>
-        </span>
-        <div class="footer-list">
-          <a href="https://github.com/liecyborg28/liecyborg28?tab=readme-ov-file">
-            <i data-lucide="github" class="scale-60"></i>
-          </a>
-          <a href="https://www.linkedin.com/in/fernando-lie-08936b234/">
-            <i data-lucide="linkedin" class="scale-60"></i>
-          </a>
-        </div>
-      </section>
+    <div class="nav-actions">
+      <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">
+        <span class="icon-sun hidden"><i data-lucide="sun"></i></span>
+        <span class="icon-moon"><i data-lucide="moon"></i></span>
+      </button>
+      <button id="menu-btn" class="icon-btn menu-btn" aria-label="Open menu">
+        <i data-lucide="menu"></i>
+      </button>
     </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div id="mobile-menu" class="mobile-menu">
+    <button id="menu-close" class="icon-btn menu-close" aria-label="Close menu">
+      <i data-lucide="x"></i>
+    </button>
+    <a class="mobile-link" href="#about"><span class="nav-num">01</span>About</a>
+    <a class="mobile-link" href="#skills"><span class="nav-num">02</span>Skills</a>
+    <a class="mobile-link" href="#experience"><span class="nav-num">03</span>Experience</a>
+    <a class="mobile-link" href="#projects"><span class="nav-num">04</span>Projects</a>
+    <a class="mobile-link" href="#contact"><span class="nav-num">05</span>Contact</a>
   </div>
+
+  <main>
+    <!-- HERO -->
+    <section id="home">
+      <div class="wrap hero-grid">
+        <div class="hero-visual">
+          <div class="mission-scene">
+            <!-- figure-8 mission trajectory: home planet ⇄ avatar planet -->
+            <svg class="mission-svg" viewBox="0 0 600 560" aria-hidden="true">
+              <path id="missionPath" class="mission-path"
+                d="M 165 86 A 70 70 0 1 0 105 159 L 360 122 A 210 210 0 1 1 180 343 L 165 86 Z"
+                fill="none" />
+              <g class="mission-rocket">
+                <text transform="rotate(45)" text-anchor="middle" dominant-baseline="central"
+                  font-size="22">🚀</text>
+                <animateMotion dur="15s" repeatCount="indefinite" rotate="auto">
+                  <mpath href="#missionPath" />
+                </animateMotion>
+              </g>
+            </svg>
+
+            <div class="home-planet"></div>
+
+            <div class="planet">
+              <div class="planet-orbit"><span class="planet-moon"></span></div>
+              <div class="planet-orbit planet-orbit-2"><span class="planet-moon planet-moon-2"></span></div>
+              <!-- mobile only: simple circular rocket orbit replaces the figure-8 -->
+              <div class="planet-orbit planet-orbit-rocket"><span class="rocket-mobile">🚀</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-copy">
+          <div class="hero-status font-family-mono">
+            <span class="status-dot"></span>
+            <span>open_to_work&nbsp;=&nbsp;<span class="status-true">true</span></span>
+          </div>
+
+          <h1 class="hero-name">Fernando <span class="text-gradient">Lie</span></h1>
+
+          <p class="hero-role font-family-mono">
+            &gt;&nbsp;<span class="typed-role">Software Engineer</span><span class="typed-cursor">▍</span>
+          </p>
+
+          <p class="hero-desc">
+            Software engineer focused on building fullstack web applications and AI-powered
+            systems — shipping products with the MERN &amp; MEAN stacks, FastAPI, and LLM
+            integrations.
+          </p>
+
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="https://wa.me/6285250621375">
+              <i data-lucide="rocket"></i> Let's Talk
+            </a>
+            <a class="btn btn-ghost" href="/about/cv.pdf">
+              <i data-lucide="file-down"></i> Download CV
+            </a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat">
+              <span class="stat-num text-gradient">3+</span>
+              <span class="stat-label font-family-mono">years experience</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num text-gradient">5</span>
+              <span class="stat-label font-family-mono">projects shipped</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num text-gradient">15+</span>
+              <span class="stat-label font-family-mono">technologies</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="#about" class="scroll-hint font-family-mono">
+        <i data-lucide="chevron-down"></i>
+        <span>scroll to explore</span>
+      </a>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-eyebrow font-family-mono">01 · about</span>
+          <h2 class="section-title">Mission Briefing</h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-copy">
+            <p>
+              Hi, I'm <strong>Nando</strong> — a software engineer with 3+ years of hands-on
+              experience building full-stack web applications. I currently work as an
+              <strong>AI Native Engineer</strong>, integrating Large Language Models, AI agents,
+              and external AI services into enterprise applications.
+            </p>
+            <p>
+              From designing REST APIs and database schemas to crafting responsive interfaces
+              and deploying to production, I enjoy owning the whole journey of a product —
+              from first commit to launch.
+            </p>
+            <div class="about-chips">
+              <span class="about-chip glass"><i data-lucide="map-pin"></i> Indonesia</span>
+              <span class="about-chip glass"><i data-lucide="briefcase"></i> AI Native Engineer @ eBdesk</span>
+              <span class="about-chip glass"><i data-lucide="rocket"></i> Building since 2022</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-eyebrow font-family-mono">02 · skills</span>
+          <h2 class="section-title">Onboard Systems</h2>
+        </div>
+      </div>
+
+      <div class="marquee">
+        <div class="marquee-track" id="skills-row-1"></div>
+      </div>
+      <div class="marquee marquee-reverse">
+        <div class="marquee-track" id="skills-row-2"></div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-eyebrow font-family-mono">03 · experience</span>
+          <h2 class="section-title">Flight Log</h2>
+        </div>
+
+        <div class="timeline" id="timeline"></div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-eyebrow font-family-mono">04 · projects</span>
+          <h2 class="section-title">Launched Missions</h2>
+        </div>
+
+        <div class="projects-grid" id="projects-grid"></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="wrap">
+        <div class="contact-panel glass">
+          <span class="section-eyebrow font-family-mono">05 · contact</span>
+          <h2 class="contact-title">Ready for the next <span class="text-gradient">mission</span>?</h2>
+          <p class="contact-desc">
+            Feel free to reach out if you're looking for an engineer, have a question,
+            or just want to connect.
+          </p>
+          <div class="contact-actions">
+            <a class="btn btn-primary"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=buildwithnando@gmail.com&su=Collaboration%20Opportunity&body=Hello,%0A%0AI%20hope%20you're%20doing%20well.%20I%20would%20like%20to%20explore%20a%20potential%20collaboration%20opportunity%20with%20you.%20Please%20let%20me%20know%20if%20you're%20available%20to%20discuss%20further.%0A%0AThank%20you!">
+              <i data-lucide="mail"></i> buildwithnando@gmail.com
+            </a>
+            <a class="btn btn-ghost" href="https://wa.me/6285250621375">
+              <i data-lucide="phone"></i> +62-852-506-213-75
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span class="footer-desc font-family-mono">
+        /* © 2025 crafted among the stars with <span class="flutter-pulse">❤️</span> by Fernando Lie */
+      </span>
+      <div class="footer-socials">
+        <a href="https://github.com/liecyborg28/liecyborg28?tab=readme-ov-file" aria-label="GitHub">
+          <i data-lucide="github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/fernando-lie-08936b234/" aria-label="LinkedIn">
+          <i data-lucide="linkedin"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
 
   <!-- Main Script -->
   <script type="module" src="/src/main.ts"></script>

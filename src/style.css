@@ -3,62 +3,83 @@
 
 @layer base {
   :root {
+    /* set by initParallax() on scroll/pointermove; stay 0 when reduced
+       motion or on touch devices */
+    --scroll-y: 0;
+    --mouse-x: 0;
+    --mouse-y: 0;
     --font-family-primary: "Space Grotesk", sans-serif;
     --font-family-mono: "JetBrains Mono", monospace;
-    --font-family-secondary: "JetBrains Mono", monospace;
-    --accent: 14 116 144;
-    /* cyan-700 */
-    --accent-2: 124 58 237;
-    /* violet-600 */
+    --accent: 79 70 229;
+    /* indigo-600 */
+    --accent-2: 219 39 119;
+    /* pink-600 */
     --text-color: 15 23 42;
     --text-muted: 71 85 105;
-    --text-color-secondary: 14 116 144;
-    --text-color-tertiary: 124 58 237;
-    --custom-bg-color: 240 249 255;
+    --custom-bg-color: 238 242 255;
     --glass-bg: 15 23 42;
     --glass-border: 15 23 42;
-    --grid-color: 15 23 42;
+    --star-color: 79 70 229;
     --bg-gradient: radial-gradient(circle at 40% 40%,
-        #e0f2fe 0%,
-        #ede9fe 50%,
+        #e0e7ff 0%,
+        #fce7f3 50%,
         #f8fafc 100%);
   }
 
   .dark {
-    --accent: 34 211 238;
-    /* cyan-400 */
-    --accent-2: 167 139 250;
-    /* violet-400 */
+    --accent: 129 140 248;
+    /* indigo-400 */
+    --accent-2: 244 114 182;
+    /* pink-400 */
     --text-color: 226 232 240;
     --text-muted: 148 163 184;
-    --text-color-secondary: 34 211 238;
-    --text-color-tertiary: 167 139 250;
-    --custom-bg-color: 2 6 23;
+    --custom-bg-color: 3 1 16;
     --glass-bg: 148 163 184;
     --glass-border: 148 163 184;
-    --grid-color: 34 211 238;
+    --star-color: 241 245 249;
     --bg-gradient: radial-gradient(circle at 50% 0%,
-        #0b1026 0%,
-        #050314 45%,
-        #02010a 100%);
+        #0b0b2e 0%,
+        #060118 45%,
+        #010005 100%);
   }
 
   html,
   body {
-    animation: gradient-move 10s ease infinite;
     background: var(--bg-gradient);
-    background-size: 300% 300%;
+    background-attachment: fixed;
     color-scheme: light dark;
+    color: rgb(var(--text-color));
     font-family: var(--font-family-primary);
     font-optical-sizing: auto;
-    font-weight: normal;
-    font-style: normal;
     background-color: var(--custom-bg-color);
     scrollbar-width: none;
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
-  /* futuristic grid overlay */
+  /* tactical blueprint grid: fine 40px cells + bold 200px cells, steady
+     (no twinkle/parallax) as the simulation's reference frame.
+     NOTE on layering: body's own background paints ABOVE any z:-1 pseudo,
+     so all fx layers use z-index 0 and real content is lifted to z-index 1 */
+  html::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgb(var(--accent) / 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--accent) / 0.07) 1px, transparent 1px),
+      linear-gradient(rgb(var(--accent) / 0.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--accent) / 0.12) 1px, transparent 1px);
+    background-size:
+      40px 40px,
+      40px 40px,
+      200px 200px,
+      200px 200px;
+  }
+
+  /* starfield (depth layers via background-size) */
   body::before {
     content: "";
     position: fixed;
@@ -66,13 +87,32 @@
     z-index: 0;
     pointer-events: none;
     background-image:
-      linear-gradient(rgb(var(--grid-color) / 0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(var(--grid-color) / 0.06) 1px, transparent 1px);
-    background-size: 42px 42px;
-    mask-image: radial-gradient(ellipse 90% 90% at 50% 40%, black 40%, transparent 100%);
+      radial-gradient(1.5px 1.5px at 25px 35px, rgb(var(--star-color) / 0.9), transparent 100%),
+      radial-gradient(1px 1px at 160px 120px, rgb(var(--star-color) / 0.7), transparent 100%),
+      radial-gradient(2px 2px at 300px 220px, rgb(var(--star-color) / 0.8), transparent 100%),
+      radial-gradient(1px 1px at 80px 250px, rgb(var(--star-color) / 0.6), transparent 100%),
+      radial-gradient(1.5px 1.5px at 220px 60px, rgb(var(--star-color) / 0.75), transparent 100%),
+      radial-gradient(1px 1px at 120px 180px, rgb(var(--star-color) / 0.5), transparent 100%);
+    background-size:
+      550px 550px,
+      350px 350px,
+      450px 450px,
+      250px 250px,
+      400px 400px,
+      300px 300px;
+    /* parallax: each star layer moves at its own depth-based speed,
+       vertically with scroll and horizontally with the pointer */
+    background-position:
+      calc(var(--mouse-x) * -18px) calc(var(--scroll-y) * -0.30px),
+      calc(var(--mouse-x) * -8px) calc(var(--scroll-y) * -0.16px),
+      calc(var(--mouse-x) * -14px) calc(var(--scroll-y) * -0.24px),
+      calc(var(--mouse-x) * -4px) calc(var(--scroll-y) * -0.08px),
+      calc(var(--mouse-x) * -11px) calc(var(--scroll-y) * -0.20px),
+      calc(var(--mouse-x) * -6px) calc(var(--scroll-y) * -0.12px);
+    animation: star-twinkle 4s ease-in-out infinite alternate;
   }
 
-  /* floating neon orbs */
+  /* nebula clouds */
   body::after {
     content: "";
     position: fixed;
@@ -80,9 +120,18 @@
     z-index: 0;
     pointer-events: none;
     background:
-      radial-gradient(600px circle at 15% 20%, rgb(var(--accent) / 0.14), transparent 60%),
-      radial-gradient(700px circle at 85% 75%, rgb(var(--accent-2) / 0.14), transparent 60%);
-    animation: orb-float 12s ease-in-out infinite;
+      radial-gradient(600px circle at 15% 20%, rgb(var(--accent) / 0.18), transparent 60%),
+      radial-gradient(700px circle at 85% 75%, rgb(var(--accent-2) / 0.14), transparent 60%),
+      radial-gradient(500px circle at 60% 35%, rgb(147 51 234 / 0.12), transparent 60%);
+    background-position: calc(var(--mouse-x) * -24px) calc(var(--scroll-y) * -0.05px);
+    animation: orb-float 14s ease-in-out infinite;
+  }
+
+  /* lift real content above the fx layers */
+  main,
+  .site-footer {
+    position: relative;
+    z-index: 1;
   }
 
   ::-webkit-scrollbar {
@@ -96,76 +145,47 @@
   button {
     @apply cursor-pointer;
   }
+
+  section {
+    /* per-section parallax progress, set by initParallax() */
+    --p: 0;
+    @apply py-24 scroll-mt-24;
+  }
 }
 
 @layer components {
-  .font-family-primary {
-    font-family: var(--font-family-primary);
-  }
-
-  .font-family-secondary {
-    font-family: var(--font-family-secondary);
-  }
-
   .font-family-mono {
     font-family: var(--font-family-mono);
   }
 
-  .glow-text {
-    color: rgb(var(--text-color));
-    text-shadow:
-      0 0 6px rgb(var(--accent) / 0.5),
-      0 0 12px rgb(var(--accent) / 0.4),
-      0 0 20px rgb(var(--accent) / 0.2);
-    transition: all 0.3s ease;
+  .wrap {
+    @apply w-full max-w-6xl mx-auto px-6;
   }
 
-  .glow-text-animate {
-    color: rgb(var(--text-color));
-    text-shadow:
-      0 0 8px rgb(var(--accent) / 0.6),
-      0 0 16px rgb(var(--accent) / 0.4),
-      0 0 24px rgb(var(--accent) / 0.2);
-    animation: glow-pulse 2.5s ease-in-out infinite alternate;
+  .glass {
+    background-color: rgb(var(--glass-bg) / 0.08);
+    border-color: rgb(var(--glass-border) / 0.2);
+    @apply backdrop-blur-md border shadow-lg;
   }
 
-  /* for text */
-  @keyframes glow-pulse {
+  .text-gradient {
+    background: linear-gradient(90deg, rgb(var(--accent)), rgb(var(--accent-2)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* animations                                                          */
+  /* ------------------------------------------------------------------ */
+
+  @keyframes star-twinkle {
     from {
-      text-shadow:
-        0 0 4px rgb(var(--accent) / 0.4),
-        0 0 8px rgb(var(--accent) / 0.3),
-        0 0 12px rgb(var(--accent) / 0.2);
+      opacity: 0.55;
     }
 
     to {
-      text-shadow:
-        0 0 10px rgb(var(--accent) / 0.7),
-        0 0 20px rgb(var(--accent) / 0.5),
-        0 0 30px rgb(var(--accent) / 0.3);
-    }
-  }
-
-  /* for linear-gradient */
-  @keyframes gradient-move {
-    0% {
-      background-position: 0% 0%;
-    }
-
-    25% {
-      background-position: 100% 0%;
-    }
-
-    50% {
-      background-position: 100% 100%;
-    }
-
-    75% {
-      background-position: 0% 100%;
-    }
-
-    100% {
-      background-position: 0% 0%;
+      opacity: 1;
     }
   }
 
@@ -181,238 +201,31 @@
     }
   }
 
-  .glass {
-    background-color: rgb(var(--glass-bg) / 0.08);
-    border-color: rgb(var(--glass-border) / 0.2);
-    @apply backdrop-blur-md border shadow-lg;
+  @keyframes orbit-spin {
+    to {
+      transform: rotate(360deg);
+    }
   }
 
-  /* HUD corner brackets */
-  .hud {
-    position: relative;
-  }
+  @keyframes shoot {
+    0% {
+      transform: translate(0, 0) rotate(20deg);
+      opacity: 0;
+    }
 
-  .hud::before,
-  .hud::after {
-    content: "";
-    position: absolute;
-    width: 22px;
-    height: 22px;
-    pointer-events: none;
-    border-color: rgb(var(--accent));
-    transition: all 0.3s ease;
-  }
+    3% {
+      opacity: 1;
+    }
 
-  .hud::before {
-    top: -2px;
-    left: -2px;
-    border-top: 2px solid rgb(var(--accent));
-    border-left: 2px solid rgb(var(--accent));
-    border-top-left-radius: 16px;
-  }
+    18% {
+      transform: translate(65vw, 24vw) rotate(20deg);
+      opacity: 0;
+    }
 
-  .hud::after {
-    bottom: -2px;
-    right: -2px;
-    border-bottom: 2px solid rgb(var(--accent-2));
-    border-right: 2px solid rgb(var(--accent-2));
-    border-bottom-right-radius: 16px;
-  }
-
-  .hud:hover::before,
-  .hud:hover::after {
-    width: 34px;
-    height: 34px;
-  }
-
-  .app-container {
-    position: relative;
-    z-index: 1;
-    @apply w-screen h-screen flex flex-col items-center;
-  }
-
-  /* navbar */
-  .navbar {
-    @apply flex items-center justify-between fixed w-[calc(100vw-32px)] lg:w-[calc(100vw-256px)] rounded-2xl left-4 lg:left-32 top-4 p-4 z-10;
-  }
-
-  .navbar-profile {
-    @apply flex items-center gap-2;
-  }
-
-  .navbar-profile-avatar {
-    background: linear-gradient(135deg, rgb(var(--accent)), rgb(var(--accent-2)));
-    box-shadow: 0 0 14px rgb(var(--accent) / 0.5);
-    @apply text-white rounded-full min-w-10 min-h-10 flex justify-center items-center;
-  }
-
-  .navbar-profile-avatar-text {
-    @apply font-bold transition duration-200 cursor-pointer;
-  }
-
-  .navbar-profile-avatar:hover .navbar-profile-avatar-text {
-    @apply transform scale-120;
-  }
-
-  .navbar-profile-title {
-    @apply cursor-pointer hidden sm:block md:hidden lg:block text-sm;
-  }
-
-  .navbar-link {
-    @apply flex gap-5 items-center;
-  }
-
-  .navbar-link-item {
-    color: rgb(var(--text-color));
-    transition: color 0.2s ease;
-    @apply cursor-pointer hidden sm:hidden md:block text-sm;
-  }
-
-  .navbar-link-item:hover {
-    color: rgb(var(--accent));
-  }
-
-  .nav-num {
-    color: rgb(var(--accent));
-    font-family: var(--font-family-mono);
-    @apply text-xs mr-1;
-  }
-
-  .navbar-link-icon {
-    @apply cursor-pointer block sm:block md:hidden;
-  }
-
-  [data-lucide="menu"] {
-    color: rgb(var(--text-color));
-  }
-
-  .navbar-link-switch-mode {
-    @apply flex w-20 h-10 p-1 rounded-4xl items-center cursor-pointer;
-  }
-
-  .navbar-link-switch-mode-indicator {
-    @apply w-8 h-8 rounded-full flex justify-center items-center transition ease-in duration-200;
-  }
-
-  .toggle-dark {
-    @apply justify-end;
-  }
-
-  /* drawer */
-  .drawer {
-    @apply flex flex-col w-[50vw] sm:w-[40vw] md:w-[20vw] h-[calc(80vh)] md:hidden fixed rounded-2xl right-4 top-27 duration-500 -z-10 opacity-0;
-  }
-
-  .show {
-    @apply z-10 opacity-100;
-  }
-
-  .drawer-link {
-    @apply flex flex-col gap-5 p-4;
-  }
-
-  .drawer-link-item {
-    color: rgb(var(--text-color));
-    @apply text-sm;
-  }
-
-  .close-drawer {
-    color: rgb(var(--text-color));
-    @apply flex justify-end;
-  }
-
-  /* content */
-  .content {
-    height: calc(100vh - 16px);
-    max-height: calc(100vh - 16px);
-    @apply mt-4 mx-4 flex flex-col min-w-min rounded-t-2xl;
-  }
-
-  /* section */
-  section {
-    @apply flex pt-27 pb-7 lg:w-[calc(100vw-256px)];
-  }
-
-  /* shared section title with code-comment prefix */
-  .section-title::before {
-    content: "// ";
-    color: rgb(var(--accent));
-    font-family: var(--font-family-mono);
-  }
-
-  #about {
-    @apply flex-col md:flex-row h-screen items-center gap-5 md:my-12;
-  }
-
-  .about-avatar {
-    box-shadow: 0 0 32px rgb(var(--accent) / 0.18);
-    @apply min-w-50 min-h-50 rounded-2xl bg-cover bg-no-repeat bg-center bg-[url(/about/avatar.png)] overflow-hidden md:min-w-80 md:min-h-80 md:m-10 md:mr-5 lg:ml-20;
-  }
-
-  .about-properties {
-    @apply flex flex-col gap-5 items-center md:items-start md:m-10 md:ml-5 lg:mr-20;
-  }
-
-  .about-text {
-    color: rgb(var(--text-color));
-    @apply p-4 rounded-2xl flex flex-col;
-  }
-
-  /* terminal window header */
-  .terminal-bar {
-    border-color: rgb(var(--glass-border) / 0.2);
-    @apply -mx-4 -mt-4 mb-4 px-4 py-3 border-b flex items-center gap-2;
-  }
-
-  .terminal-dot {
-    @apply w-3 h-3 rounded-full inline-block;
-  }
-
-  .dot-red {
-    background-color: #ff5f57;
-  }
-
-  .dot-yellow {
-    background-color: #febc2e;
-  }
-
-  .dot-green {
-    background-color: #28c840;
-  }
-
-  .terminal-path {
-    color: rgb(var(--text-muted));
-    @apply ml-2 text-xs;
-  }
-
-  .terminal-cmd {
-    color: rgb(var(--text-muted));
-    @apply text-sm mb-2 text-center md:text-left;
-  }
-
-  .terminal-prompt {
-    color: rgb(var(--accent));
-  }
-
-  .about-text-title {
-    @apply text-3xl md:text-5xl text-center md:text-left font-bold;
-  }
-
-  .title-accent {
-    background: linear-gradient(90deg, rgb(var(--accent)), rgb(var(--accent-2)));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  .about-text-role {
-    color: rgb(var(--accent));
-    @apply py-4 text-lg md:text-2xl text-center md:text-left;
-  }
-
-  .typed-cursor {
-    color: rgb(var(--accent));
-    animation: cursor-blink 1s step-end infinite;
+    100% {
+      transform: translate(65vw, 24vw) rotate(20deg);
+      opacity: 0;
+    }
   }
 
   @keyframes cursor-blink {
@@ -425,26 +238,6 @@
     50% {
       opacity: 0;
     }
-  }
-
-  .about-text-desc {
-    @apply text-center md:text-left;
-  }
-
-  .hero-status {
-    color: rgb(var(--text-muted));
-    @apply flex items-center justify-center md:justify-start gap-2 mt-4 text-xs md:text-sm;
-  }
-
-  .status-true {
-    color: #28c840;
-  }
-
-  .status-dot {
-    background-color: #28c840;
-    box-shadow: 0 0 8px #28c840;
-    animation: status-pulse 1.6s ease-in-out infinite;
-    @apply w-2 h-2 rounded-full inline-block;
   }
 
   @keyframes status-pulse {
@@ -461,309 +254,21 @@
     }
   }
 
-  .about-button-container {
-    @apply flex gap-5;
-  }
+  @keyframes hint-bounce {
 
-  .about-button {
-    color: rgb(var(--text-color));
-    @apply flex items-center p-4 rounded-2xl gap-2 transition-all duration-300 z-2 text-sm;
-  }
-
-  .about-button-left:hover {
-    border-color: rgb(var(--accent));
-    color: rgb(var(--accent));
-    box-shadow: 0 0 20px rgb(var(--accent) / 0.35);
-  }
-
-  .about-button-right:hover {
-    border-color: rgb(var(--accent-2));
-    color: rgb(var(--accent-2));
-    box-shadow: 0 0 20px rgb(var(--accent-2) / 0.35);
-  }
-
-  #skills {
-    @apply flex flex-col gap-8;
-  }
-
-  .skills-title {
-    color: rgb(var(--text-color));
-    @apply text-2xl md:text-3xl lg:text-4xl font-bold;
-  }
-
-  /* swiper */
-  .skills-swiper {
-    @apply w-[calc(100vw-2rem)] lg:w-[calc(100vw-256px)] overflow-hidden;
-  }
-
-  .swiper-slide {
-    @apply flex justify-center items-center;
-  }
-
-  .swiper-item {
-    @apply flex flex-col items-center gap-2;
-  }
-
-  .swiper-item-image-container {
-    @apply transition duration-200 min-w-10 min-h-10 flex justify-center items-center rounded-xl md:rounded-2xl sm:min-w-15 sm:min-h-15 md:min-w-25 md:min-h-25 bg-white;
-  }
-
-  .swiper-item-image-container:hover {
-    border-color: rgb(var(--accent));
-    box-shadow: 0 0 20px rgb(var(--accent) / 0.4);
-  }
-
-  .swiper-item-image {
-    @apply w-5 h-5 sm:w-10 sm:h-10 md:w-15 md:h-15;
-  }
-
-  .swiper-item-image-text {
-    color: rgb(var(--text-color));
-    font-family: var(--font-family-mono);
-    @apply font-normal text-[10px] sm:text-xs md:text-sm;
-  }
-
-  #experiences {
-    @apply flex flex-col gap-8;
-  }
-
-  .experiences-title {
-    color: rgb(var(--text-color));
-    @apply text-2xl md:text-3xl lg:text-4xl font-bold;
-  }
-
-  .experiences-container {
-    @apply flex flex-col gap-4;
-  }
-
-  .experience {
-    border-left: 2px solid rgb(var(--accent) / 0.35);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    @apply flex flex-col rounded-2xl p-4 gap-3;
-  }
-
-  .experience:hover {
-    border-left-color: rgb(var(--accent));
-    box-shadow: 0 0 24px rgb(var(--accent) / 0.15);
-  }
-
-  .experience-heading {
-    @apply flex flex-col gap-3 md:flex-row md:items-center md:justify-between;
-  }
-
-  .experience-position {
-    color: rgb(var(--text-color));
-    @apply text-xl font-semibold;
-  }
-
-  .experience-place {
-    color: rgb(var(--text-color-secondary));
-    font-family: var(--font-family-mono);
-    @apply text-xs md:text-sm;
-  }
-
-  .experience-period {
-    color: rgb(var(--text-muted));
-    font-family: var(--font-family-mono);
-    @apply text-xs md:text-sm;
-  }
-
-  .experience-period::before {
-    content: "[ ";
-    color: rgb(var(--accent));
-  }
-
-  .experience-period::after {
-    content: " ]";
-    color: rgb(var(--accent));
-  }
-
-  li {
-    color: rgb(var(--text-color));
-    @apply text-sm;
-  }
-
-  ul.list-disc li::marker {
-    color: rgb(var(--accent));
-  }
-
-  .experience-footer {
-    @apply flex flex-wrap gap-2;
-  }
-
-  .experience-footer-item {
-    color: rgb(var(--text-color));
-    font-family: var(--font-family-mono);
-    border-color: rgb(var(--accent) / 0.3);
-    transition: all 0.2s ease;
-    @apply flex py-1 px-2 rounded-4xl justify-center items-center text-xs md:text-sm;
-  }
-
-  .experience-footer-item:hover {
-    color: rgb(var(--accent));
-    border-color: rgb(var(--accent));
-  }
-
-  #projects {
-    @apply flex flex-col gap-8;
-  }
-
-  .project-swiper {
-    @apply w-full overflow-hidden flex items-center;
-  }
-
-  .project-slide {
-    @apply flex justify-center items-center w-full rounded-xl overflow-hidden;
-  }
-
-  .projects-title {
-    color: rgb(var(--text-color));
-    @apply text-2xl md:text-3xl lg:text-4xl font-bold;
-  }
-
-  .projects-container {
-    @apply flex gap-4 flex-wrap justify-center;
-  }
-
-  .project {
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-    @apply flex flex-col flex-1 rounded-2xl p-4 min-w-xs max-w-2xl mb-4;
-  }
-
-  .project:hover {
-    border-color: rgb(var(--accent) / 0.6);
-    box-shadow: 0 0 28px rgb(var(--accent) / 0.18);
-    transform: translateY(-4px);
-  }
-
-  .project-title {
-    color: rgb(var(--text-color));
-    @apply text-lg md:text-xl lg:text-2xl font-bold pt-4;
-  }
-
-  .project-title::before {
-    content: "> ";
-    color: rgb(var(--accent));
-    font-family: var(--font-family-mono);
-  }
-
-  .project-desc {
-    color: rgb(var(--text-color));
-    @apply text-xs md:text-sm pb-4 pt-2;
-  }
-
-  .techs {
-    @apply flex flex-wrap gap-2 pb-4;
-  }
-
-  .tech {
-    color: rgb(var(--text-color));
-    font-family: var(--font-family-mono);
-    border-color: rgb(var(--accent) / 0.3);
-    transition: all 0.2s ease;
-    @apply flex py-1 px-2 rounded-4xl justify-center items-center text-xs md:text-sm;
-  }
-
-  .tech:hover {
-    color: rgb(var(--accent));
-    border-color: rgb(var(--accent));
-  }
-
-  .project-footer {
-    @apply flex gap-4;
-  }
-
-  .project-footer-item {
-    color: rgb(var(--text-color-tertiary));
-    @apply flex justify-center items-center text-sm cursor-pointer gap-1;
-  }
-
-  .project-footer-item:hover {
-    @apply underline;
-  }
-
-  .project-footer-item-disable {
-    @apply flex justify-center items-center text-sm text-gray-500 no-underline cursor-default pointer-events-none gap-1;
-  }
-
-  #contact {
-    @apply flex flex-col w-full items-center justify-center pb-27;
-  }
-
-  .contact-title {
-    color: rgb(var(--text-color));
-    @apply text-2xl md:text-3xl lg:text-4xl font-bold text-center;
-  }
-
-  .contact-desc {
-    color: rgb(var(--text-muted));
-    @apply pt-3 pb-10 text-lg text-center;
-  }
-
-  .contact-list {
-    @apply flex flex-col md:flex-row gap-5 md:justify-center md:gap-10;
-  }
-
-  .contact-item {
-    color: rgb(var(--text-color));
-    transition: all 0.3s ease;
-    @apply flex gap-2 justify-center items-center cursor-pointer rounded-2xl px-4 py-3 text-sm;
-  }
-
-  .contact-item:hover {
-    color: rgb(var(--accent));
-    border-color: rgb(var(--accent));
-    box-shadow: 0 0 20px rgb(var(--accent) / 0.3);
-  }
-
-  #footer {
-    color: rgb(var(--text-color));
-    border-color: rgb(var(--glass-border) / 0.2);
-    @apply flex flex-col items-center py-5 border-t gap-3;
-  }
-
-  .footer-list {
-    @apply flex gap-1 cursor-pointer;
-  }
-
-  .footer-list a {
-    transition: color 0.2s ease;
-  }
-
-  .footer-list a:hover {
-    color: rgb(var(--accent));
-  }
-
-  .footer-desc {
-    @apply text-center text-xs md:text-sm;
-  }
-
-  .footer-comment {
-    color: rgb(var(--text-muted));
-  }
-
-  /* scroll reveal */
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .reveal-visible {
-    opacity: 1;
-    transform: none;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-
-    .reveal {
-      opacity: 1;
-      transform: none;
-      transition: none;
+    0%,
+    100% {
+      transform: translate(-50%, 0);
     }
 
-    body::after {
-      animation: none;
+    50% {
+      transform: translate(-50%, 8px);
+    }
+  }
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
     }
   }
 
@@ -786,32 +291,822 @@
     animation: flutter-pulse 1.2s ease-in-out infinite;
   }
 
-  @keyframes flutter-shake {
+  /* shooting stars */
+  .shooting-star {
+    position: fixed;
+    top: 12%;
+    left: -10%;
+    width: 130px;
+    height: 2px;
+    z-index: 0;
+    pointer-events: none;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, transparent, rgb(var(--star-color) / 0.9));
+    opacity: 0;
+    animation: shoot 9s linear infinite;
+  }
 
-    0%,
-    100% {
-      transform: translate(0, 0);
+  .star-2 {
+    top: 45%;
+    width: 90px;
+    animation-duration: 13s;
+    animation-delay: 5s;
+  }
+
+  .star-3 {
+    top: 70%;
+    width: 70px;
+    animation-duration: 17s;
+    animation-delay: 9s;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* navbar                                                              */
+  /* ------------------------------------------------------------------ */
+
+  .site-nav {
+    @apply fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-6 rounded-full px-5 py-3 w-[calc(100vw-2rem)] max-w-3xl justify-between;
+  }
+
+  .nav-logo {
+    color: rgb(var(--accent));
+    text-shadow: 0 0 12px rgb(var(--accent) / 0.6);
+    @apply font-bold text-sm;
+  }
+
+  .nav-links {
+    @apply hidden md:flex items-center gap-5;
+  }
+
+  .nav-link {
+    color: rgb(var(--text-color));
+    transition: color 0.2s ease;
+    @apply text-sm;
+  }
+
+  .nav-link:hover {
+    color: rgb(var(--accent));
+  }
+
+  .nav-num {
+    color: rgb(var(--accent));
+    font-family: var(--font-family-mono);
+    @apply text-xs mr-1;
+  }
+
+  .nav-actions {
+    @apply flex items-center gap-2;
+  }
+
+  .icon-btn {
+    color: rgb(var(--text-color));
+    background-color: rgb(var(--glass-bg) / 0.08);
+    border: 1px solid rgb(var(--glass-border) / 0.2);
+    transition: all 0.2s ease;
+    @apply w-9 h-9 rounded-full flex justify-center items-center;
+  }
+
+  .icon-btn:hover {
+    color: rgb(var(--accent));
+    border-color: rgb(var(--accent));
+  }
+
+  .icon-btn svg {
+    @apply w-4 h-4;
+  }
+
+  .menu-btn {
+    @apply md:hidden;
+  }
+
+  /* mobile menu */
+  .mobile-menu {
+    background-color: rgb(var(--custom-bg-color) / 0.92);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    @apply fixed inset-0 z-40 backdrop-blur-xl flex flex-col items-center justify-center gap-8;
+  }
+
+  .mobile-menu.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .menu-close {
+    @apply absolute top-6 right-6;
+  }
+
+  .mobile-link {
+    color: rgb(var(--text-color));
+    @apply text-2xl font-semibold;
+  }
+
+  .mobile-link:hover {
+    color: rgb(var(--accent));
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* hero                                                                */
+  /* ------------------------------------------------------------------ */
+
+  #home {
+    @apply min-h-screen flex items-center relative pt-24 pb-12 md:pt-28 md:pb-16;
+  }
+
+  /* single column (mobile & tablet portrait); two columns from lg up */
+  .hero-grid {
+    @apply grid lg:grid-cols-[1fr_1.3fr] gap-6 lg:gap-12 items-center;
+  }
+
+  .hero-visual {
+    /* items-center keeps the planet from being stretched into an ellipse
+       by the default flex align-items: stretch */
+    transform: translateY(calc(var(--scroll-y) * 0.12px));
+    @apply flex justify-center items-center lg:order-2;
+  }
+
+  /* mission scene: shared coordinate space for the SVG trajectory (viewBox
+     600x560) and the DOM planets, so the dashed path hugs them at any size */
+  .mission-scene {
+    position: relative;
+    /* 100% keeps the scene inside its grid column on tablet portrait,
+       where 92vw would otherwise overflow the ~380px column */
+    width: min(560px, 100%, 92vw);
+    aspect-ratio: 600 / 560;
+  }
+
+
+  /* mouse parallax: each scene layer sits at its own depth */
+  .mission-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    transform: translate(calc(var(--mouse-x) * 5px), calc(var(--mouse-y) * 5px));
+    transition: transform 0.3s ease-out;
+  }
+
+  .mission-path {
+    stroke: rgb(var(--accent-2) / 0.5);
+    stroke-width: 1.5;
+    stroke-dasharray: 6 8;
+  }
+
+  .mission-rocket text {
+    filter: drop-shadow(0 0 6px rgb(var(--accent-2) / 0.8));
+  }
+
+  /* the rocket's home planet: flat tactical disc at the scene's top-left */
+  .home-planet {
+    position: absolute;
+    left: 9.2%;
+    top: 8.9%;
+    width: 13.3%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: rgb(var(--accent-2) / 0.15);
+    border: 2px solid rgb(var(--accent-2) / 0.7);
+    box-shadow: 0 0 24px rgb(var(--accent-2) / 0.35);
+    /* farther away → drifts opposite the pointer */
+    transform: translate(calc(var(--mouse-x) * -16px), calc(var(--mouse-y) * -16px));
+    transition: transform 0.3s ease-out;
+  }
+
+  .home-planet::after {
+    content: "base_01";
+    position: absolute;
+    top: 112%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-family-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: rgb(var(--text-muted));
+    white-space: nowrap;
+  }
+
+  .planet {
+    /* center (390,330) r=150 in the scene's 600x560 coordinate space */
+    position: absolute;
+    left: 40%;
+    top: 32.1%;
+    width: 50%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    /* flat tactical disc: photo over a plain translucent fill, no texture */
+    background-color: rgb(var(--accent) / 0.12);
+    background-image: url(/about/avatar.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 0 60px rgb(var(--accent) / 0.25);
+    transform: translate(calc(var(--mouse-x) * 10px), calc(var(--mouse-y) * 10px));
+    transition: transform 0.3s ease-out;
+  }
+
+  /* rim ring lives on ::before so it always renders ON TOP of the photo */
+  .planet::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid rgb(var(--accent) / 0.7);
+    pointer-events: none;
+  }
+
+  /* satellite orbits sit clear of the rocket's big loop (r≈210 in scene
+     units): inner ring r≈186, outer ring r≈240 */
+  .planet-orbit {
+    position: absolute;
+    inset: -12%;
+    border: 1px dashed rgb(var(--accent) / 0.3);
+    border-radius: 50%;
+    animation: orbit-spin 16s linear infinite;
+    pointer-events: none;
+  }
+
+  .planet-moon {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgb(var(--accent-2));
+    box-shadow: 0 0 12px rgb(var(--accent-2));
+  }
+
+  /* outer orbit: counter-rotating satellite */
+  .planet-orbit-2 {
+    inset: -30%;
+    border-color: rgb(var(--accent-2) / 0.25);
+    animation: orbit-spin 9s linear infinite reverse;
+  }
+
+  /* mobile-only circular rocket lane, midway between the satellite orbits */
+  .planet-orbit-rocket {
+    display: none;
+    inset: -21%;
+    border-color: rgb(var(--accent-2) / 0.35);
+    animation: orbit-spin 8s linear infinite;
+  }
+
+  .rocket-mobile {
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    /* clockwise orbit → at the top the rocket travels right; the emoji
+       points NE, so +45deg aims it along the flight path */
+    transform: translateX(-50%) rotate(45deg);
+    font-size: 16px;
+    line-height: 1;
+    filter: drop-shadow(0 0 6px rgb(var(--accent-2) / 0.8));
+  }
+
+  /* mobile: drop the figure-8 (path + home planet) and let the rocket
+     circle the avatar planet. The scene collapses to a compact square that
+     hugs the outermost orbit (-30% → planet = scene/1.6), horizontally
+     centered by the flex parent.
+     NOTE: this block must stay BELOW the base .planet / .planet-orbit-rocket
+     rules — equal specificity, so source order decides the winner */
+  @media (max-width: 767px) {
+    .mission-scene {
+      width: min(360px, 88vw);
+      aspect-ratio: 1;
     }
 
-    10%,
-    30%,
-    50%,
-    70%,
-    90% {
-      transform: translate(-2px, 0);
+    .planet {
+      left: 18.75%;
+      top: 18.75%;
+      width: 62.5%;
     }
 
-    20%,
-    40%,
-    60%,
-    80% {
-      transform: translate(2px, 0);
+    .mission-svg,
+    .home-planet {
+      display: none;
+    }
+
+    .planet-orbit-rocket {
+      display: block;
     }
   }
 
-  .flutter-shake {
-    display: inline-block;
-    animation: flutter-shake 0.4s ease-in-out infinite;
+  .planet-moon-2 {
+    width: 8px;
+    height: 8px;
+    top: -4px;
+    background: rgb(var(--accent));
+    box-shadow: 0 0 10px rgb(var(--accent));
   }
 
+
+  .hero-copy {
+    @apply flex flex-col items-center lg:items-start text-center lg:text-left lg:order-1;
+  }
+
+  .hero-status {
+    color: rgb(var(--text-muted));
+    @apply flex items-center gap-2 text-xs md:text-sm mb-5;
+  }
+
+  .status-true {
+    color: #28c840;
+  }
+
+  .status-dot {
+    background-color: #28c840;
+    box-shadow: 0 0 8px #28c840;
+    animation: status-pulse 1.6s ease-in-out infinite;
+    @apply w-2 h-2 rounded-full inline-block;
+  }
+
+  .hero-name {
+    @apply text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight;
+  }
+
+  .hero-role {
+    color: rgb(var(--accent));
+    @apply text-lg md:text-xl lg:text-2xl mt-4;
+  }
+
+  .typed-cursor {
+    color: rgb(var(--accent));
+    animation: cursor-blink 1s step-end infinite;
+  }
+
+  .hero-desc {
+    color: rgb(var(--text-muted));
+    @apply mt-5 max-w-xl;
+  }
+
+  .hero-cta {
+    @apply flex flex-wrap justify-center lg:justify-start gap-4 mt-8;
+  }
+
+  .hero-stats {
+    @apply flex flex-wrap justify-center lg:justify-start gap-6 lg:gap-8 mt-10;
+  }
+
+  .stat {
+    @apply flex flex-col items-center lg:items-start;
+  }
+
+  .stat-num {
+    @apply text-3xl lg:text-4xl font-bold;
+  }
+
+  .stat-label {
+    color: rgb(var(--text-muted));
+    @apply text-[10px] lg:text-xs mt-1;
+  }
+
+  .scroll-hint {
+    color: rgb(var(--text-muted));
+    animation: hint-bounce 2s ease-in-out infinite;
+    opacity: calc(1 - var(--scroll-y) / 250);
+    @apply absolute bottom-6 left-1/2 flex flex-col items-center text-xs;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* buttons                                                             */
+  /* ------------------------------------------------------------------ */
+
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all duration-300;
+  }
+
+  .btn svg {
+    @apply w-4 h-4;
+  }
+
+  .btn-primary {
+    color: white;
+    background: linear-gradient(90deg, rgb(var(--accent)), rgb(var(--accent-2)));
+    box-shadow: 0 0 24px rgb(var(--accent) / 0.35);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 36px rgb(var(--accent) / 0.55);
+  }
+
+  .btn-ghost {
+    color: rgb(var(--text-color));
+    background-color: rgb(var(--glass-bg) / 0.08);
+    border: 1px solid rgb(var(--glass-border) / 0.25);
+    @apply backdrop-blur-md;
+  }
+
+  .btn-ghost:hover {
+    color: rgb(var(--accent));
+    border-color: rgb(var(--accent));
+    transform: translateY(-2px);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* section head                                                        */
+  /* ------------------------------------------------------------------ */
+
+  .section-head {
+    @apply flex flex-col gap-2 mb-12;
+  }
+
+  /* parallax shear: eyebrow and title drift apart horizontally on scroll */
+  .section-eyebrow {
+    color: rgb(var(--accent));
+    letter-spacing: 0.25em;
+    transform: translateX(calc(var(--p) * 30px));
+    @apply text-xs uppercase;
+  }
+
+  .section-title {
+    transform: translateX(calc(var(--p) * -18px));
+    @apply text-3xl md:text-5xl font-bold;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* about                                                               */
+  /* ------------------------------------------------------------------ */
+
+  .about-grid {
+    @apply max-w-3xl;
+  }
+
+  .about-copy {
+    /* floats up gently while scrolling through the section */
+    transform: translateY(calc(var(--p) * -30px));
+    @apply flex flex-col gap-4;
+  }
+
+  .about-copy p {
+    color: rgb(var(--text-muted));
+  }
+
+  .about-copy strong {
+    color: rgb(var(--text-color));
+  }
+
+  .about-chips {
+    /* extra depth on top of .about-copy's drift */
+    transform: translateY(calc(var(--p) * -14px));
+    @apply flex flex-wrap gap-3 mt-2;
+  }
+
+  .about-chip {
+    color: rgb(var(--text-color));
+    @apply inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm;
+  }
+
+  .about-chip svg {
+    color: rgb(var(--accent));
+    @apply w-4 h-4;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* skills marquee                                                      */
+  /* ------------------------------------------------------------------ */
+
+  .marquee {
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+    /* the two conveyor rows shear in opposite directions on scroll */
+    transform: translateX(calc(var(--p) * -36px));
+    @apply py-3;
+  }
+
+  .marquee-reverse {
+    transform: translateX(calc(var(--p) * 36px));
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+    animation: marquee 35s linear infinite;
+  }
+
+  .marquee-reverse .marquee-track {
+    animation-direction: reverse;
+  }
+
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  .skill-chip {
+    color: rgb(var(--text-color));
+    transition: all 0.2s ease;
+    @apply flex items-center gap-3 rounded-full px-5 py-2.5 whitespace-nowrap;
+  }
+
+  .skill-chip:hover {
+    border-color: rgb(var(--accent));
+    box-shadow: 0 0 18px rgb(var(--accent) / 0.35);
+  }
+
+  .chip-icon {
+    background: white;
+    @apply w-7 h-7 rounded-md flex justify-center items-center p-0.5;
+  }
+
+  .chip-icon img {
+    @apply w-full h-full object-contain;
+  }
+
+  .chip-name {
+    @apply text-xs md:text-sm;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* experience timeline                                                 */
+  /* ------------------------------------------------------------------ */
+
+  .timeline {
+    position: relative;
+    /* the flight log drifts against the scroll for depth */
+    transform: translateY(calc(var(--p) * 26px));
+    @apply flex flex-col gap-8 pl-8;
+  }
+
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(rgb(var(--accent)), rgb(var(--accent-2)));
+    opacity: 0.4;
+  }
+
+  .timeline-item {
+    position: relative;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -33px;
+    top: 8px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgb(var(--accent));
+    box-shadow: 0 0 12px rgb(var(--accent));
+  }
+
+  .timeline-card {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    @apply rounded-2xl p-6 flex flex-col gap-3;
+  }
+
+  .timeline-card:hover {
+    border-color: rgb(var(--accent) / 0.6);
+    box-shadow: 0 0 28px rgb(var(--accent) / 0.15);
+  }
+
+  .timeline-period {
+    color: rgb(var(--accent));
+    @apply text-xs;
+  }
+
+  .timeline-position {
+    @apply text-xl font-semibold;
+  }
+
+  .timeline-place {
+    color: rgb(var(--accent-2));
+    @apply text-xs md:text-sm;
+  }
+
+  .timeline-jobs {
+    color: rgb(var(--text-muted));
+    @apply list-disc pl-5 flex flex-col gap-2 text-sm;
+  }
+
+  .timeline-jobs li::marker {
+    color: rgb(var(--accent));
+  }
+
+  .chip-row {
+    @apply flex flex-wrap gap-2 mt-2;
+  }
+
+  .mini-chip {
+    color: rgb(var(--text-color));
+    font-family: var(--font-family-mono);
+    border: 1px solid rgb(var(--accent) / 0.3);
+    transition: all 0.2s ease;
+    @apply rounded-full py-1 px-3 text-xs;
+  }
+
+  .mini-chip:hover {
+    color: rgb(var(--accent));
+    border-color: rgb(var(--accent));
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* projects                                                            */
+  /* ------------------------------------------------------------------ */
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    transform: translateY(calc(var(--p) * 30px));
+    @apply gap-6;
+  }
+
+  .project-card {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    @apply rounded-3xl overflow-hidden flex flex-col;
+  }
+
+  .project-card:hover {
+    border-color: rgb(var(--accent) / 0.6);
+    box-shadow: 0 0 28px rgb(var(--accent) / 0.18);
+    transform: translateY(-4px);
+  }
+
+  .project-media {
+    @apply w-full overflow-hidden;
+  }
+
+  .project-media .swiper-slide img {
+    aspect-ratio: 16 / 10;
+    @apply w-full object-cover object-top;
+  }
+
+  .swiper-pagination-bullet {
+    background: rgb(var(--accent));
+  }
+
+  .project-body {
+    @apply p-5 flex flex-col gap-3 flex-1;
+  }
+
+  .project-title {
+    @apply text-xl font-bold;
+  }
+
+  .project-desc {
+    color: rgb(var(--text-muted));
+    @apply text-sm flex-1;
+  }
+
+  .project-links {
+    @apply flex gap-5 mt-1;
+  }
+
+  .project-link {
+    color: rgb(var(--accent));
+    @apply inline-flex items-center gap-1.5 text-sm;
+  }
+
+  .project-link:hover {
+    @apply underline;
+  }
+
+  .project-link svg {
+    @apply w-4 h-4;
+  }
+
+  .project-link-disable {
+    color: rgb(var(--text-muted));
+    @apply inline-flex items-center gap-1.5 text-sm cursor-default pointer-events-none;
+  }
+
+  .project-link-disable svg {
+    @apply w-4 h-4;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* contact                                                             */
+  /* ------------------------------------------------------------------ */
+
+  .contact-panel {
+    position: relative;
+    overflow: hidden;
+    @apply rounded-3xl p-10 md:p-16 flex flex-col items-center text-center gap-4;
+  }
+
+  .contact-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(400px circle at 20% 0%, rgb(var(--accent) / 0.15), transparent 60%),
+      radial-gradient(400px circle at 80% 100%, rgb(var(--accent-2) / 0.15), transparent 60%);
+    /* the two nebula glows slide across the panel in opposite directions */
+    background-position:
+      calc(var(--p) * 80px) calc(var(--p) * 40px),
+      calc(var(--p) * -80px) calc(var(--p) * -40px);
+    pointer-events: none;
+  }
+
+  .contact-title {
+    @apply text-3xl md:text-5xl font-bold;
+  }
+
+  .contact-desc {
+    color: rgb(var(--text-muted));
+    @apply max-w-xl;
+  }
+
+  .contact-actions {
+    @apply flex flex-wrap justify-center gap-4 mt-4 z-10;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* footer                                                              */
+  /* ------------------------------------------------------------------ */
+
+  .site-footer {
+    border-top: 1px solid rgb(var(--glass-border) / 0.2);
+    @apply py-8;
+  }
+
+  .footer-inner {
+    @apply flex flex-col md:flex-row items-center justify-between gap-4;
+  }
+
+  .footer-desc {
+    color: rgb(var(--text-muted));
+    @apply text-xs md:text-sm text-center;
+  }
+
+  .footer-socials {
+    @apply flex gap-4;
+  }
+
+  .footer-socials a {
+    color: rgb(var(--text-muted));
+    transition: color 0.2s ease;
+  }
+
+  .footer-socials a:hover {
+    color: rgb(var(--accent));
+  }
+
+  .footer-socials svg {
+    @apply w-5 h-5;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* scroll reveal                                                       */
+  /* ------------------------------------------------------------------ */
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* fade-only variant for elements whose transform belongs to parallax */
+  .reveal-fade {
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+
+  .reveal-fade.reveal-visible {
+    opacity: 1;
+    transform: translateX(calc(var(--p) * -36px));
+  }
+
+  .marquee-reverse.reveal-fade.reveal-visible {
+    transform: translateX(calc(var(--p) * 36px));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .reveal-fade {
+      opacity: 1;
+      transition: none;
+    }
+
+    body::before,
+    body::after,
+    .shooting-star,
+    .planet-orbit,
+    .marquee-track,
+    .scroll-hint {
+      animation: none;
+    }
+
+    /* SMIL ignores reduced-motion on its own; park the rocket */
+    .mission-rocket {
+      display: none;
+    }
+  }
 }
