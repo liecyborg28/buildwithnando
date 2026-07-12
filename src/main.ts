@@ -582,16 +582,20 @@ function initReveal() {
   // marquees fade in without a transform so their parallax translate is free
   const fadeTargets = document.querySelectorAll(".marquee");
 
+  // replayable: the animation re-arms once the element fully leaves the
+  // viewport, so it plays again on every visit. The two thresholds act as
+  // hysteresis (show at ≥15% visible, reset only at 0%) to avoid flicker
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
+        if (entry.intersectionRatio >= 0.15) {
           entry.target.classList.add("reveal-visible");
-          observer.unobserve(entry.target);
+        } else if (!entry.isIntersecting) {
+          entry.target.classList.remove("reveal-visible");
         }
       });
     },
-    { threshold: 0.1 }
+    { threshold: [0, 0.15] }
   );
 
   targets.forEach((target) => {
