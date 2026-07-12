@@ -30,6 +30,8 @@ window.addEventListener("DOMContentLoaded", () => {
   initSkills();
   initExperiences();
   initProjects();
+  initTyping();
+  initReveal();
 });
 
 const mode = localStorage.getItem("theme")
@@ -207,6 +209,76 @@ function initSkills() {
     },
 
     effect: "slide",
+  });
+}
+
+function initTyping() {
+  const el = document.querySelector(".typed-role");
+  if (!el) return;
+
+  const roles = [
+    "Software Engineer",
+    "Fullstack Developer",
+    "AI Native Engineer",
+  ];
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    el.textContent = roles[0];
+    return;
+  }
+
+  let roleIndex = 0;
+  let charIndex = roles[0].length;
+  let deleting = true;
+
+  function tick() {
+    const word = roles[roleIndex];
+
+    if (deleting) {
+      charIndex--;
+      el.textContent = word.slice(0, charIndex);
+      if (charIndex === 0) {
+        deleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+        setTimeout(tick, 400);
+      } else {
+        setTimeout(tick, 45);
+      }
+    } else {
+      charIndex++;
+      el.textContent = word.slice(0, charIndex);
+      if (charIndex === word.length) {
+        deleting = true;
+        setTimeout(tick, 2200);
+      } else {
+        setTimeout(tick, 85);
+      }
+    }
+  }
+
+  setTimeout(tick, 2200);
+}
+
+function initReveal() {
+  const targets = document.querySelectorAll(
+    ".experience, .project, .section-title, .contact-list, .contact-desc"
+  );
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("reveal-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  targets.forEach((target) => {
+    target.classList.add("reveal");
+    observer.observe(target);
   });
 }
 

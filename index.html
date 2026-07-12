@@ -7,11 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- SEO -->
-  <meta name="title" content="Fernando Lie | Fullstack Developer" />
+  <meta name="title" content="Fernando Lie | Software Engineer" />
   <meta name="description"
-    content="Hi, I'm Fernando Lie — a Fullstack Developer with experience building modern web applications using MERN and MEAN stacks. Let's work together!" />
+    content="Hi, I'm Fernando Lie — a Software Engineer building modern web applications and AI-powered systems with the MERN/MEAN stacks, FastAPI, and LLM integrations. Let's work together!" />
   <meta name="keywords"
-    content="Fullstack Developer, Web Developer, MERN, MEAN, JavaScript, TypeScript, Node.js, React, Portfolio" />
+    content="Software Engineer, Fullstack Developer, Web Developer, MERN, MEAN, JavaScript, TypeScript, Node.js, React, FastAPI, AI, Portfolio" />
   <meta name="author" content="Fernando Lie">
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://buildwithnando.vercel.app" />
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
 
-  <title>Fernando Lie | Fullstack Developer</title>
+  <title>Fernando Lie | Software Engineer</title>
 </head>
 
 <body>
@@ -33,19 +33,19 @@
     <nav class="navbar glass">
       <div class="navbar-profile">
         <div class="navbar-profile-avatar">
-          <span class="navbar-profile-avatar-text font-family-primary">FL</span>
+          <span class="navbar-profile-avatar-text font-family-mono">FL</span>
         </div>
-        <span class="navbar-profile-title glow-text glow-text-animate font-family-primary">
-          Fernando Lie
+        <span class="navbar-profile-title glow-text glow-text-animate font-family-mono">
+          &lt;fernando.lie /&gt;
         </span>
       </div>
 
       <div class="navbar-link">
-        <a href="#about"><span class="navbar-link-item font-family-primary">About</span></a>
-        <a href="#skills"><span class="navbar-link-item font-family-primary">Skills</span></a>
-        <a href="#experiences"><span class="navbar-link-item font-family-primary">Experiences</span></a>
-        <a href="#projects"><span class="navbar-link-item font-family-primary">Projects</span></a>
-        <a href="#contact"><span class="navbar-link-item font-family-primary">Contact</span></a>
+        <a href="#about"><span class="navbar-link-item"><span class="nav-num">01.</span>About</span></a>
+        <a href="#skills"><span class="navbar-link-item"><span class="nav-num">02.</span>Skills</span></a>
+        <a href="#experiences"><span class="navbar-link-item"><span class="nav-num">03.</span>Experiences</span></a>
+        <a href="#projects"><span class="navbar-link-item"><span class="nav-num">04.</span>Projects</span></a>
+        <a href="#contact"><span class="navbar-link-item"><span class="nav-num">05.</span>Contact</span></a>
 
         <div class="navbar-link-switch-mode glass">
           <div class="navbar-link-switch-mode-indicator glass">
@@ -70,35 +70,48 @@
         <span class="close-drawer">
           <i class="cursor-pointer" data-lucide="x"></i>
         </span>
-        <span class="drawer-link-item font-family-primary"><a href="#about">About</a></span>
-        <span class="drawer-link-item font-family-primary"><a href="#skills">Skills</a></span>
-        <span class="drawer-link-item font-family-primary"><a href="#experiences">Experiences</a></span>
-        <span class="drawer-link-item font-family-primary"><a href="#projects">Projects</a></span>
-        <span class="drawer-link-item font-family-primary"><a href="#contact">Contact</a></span>
+        <span class="drawer-link-item font-family-mono"><a href="#about"><span class="nav-num">01.</span>About</a></span>
+        <span class="drawer-link-item font-family-mono"><a href="#skills"><span class="nav-num">02.</span>Skills</a></span>
+        <span class="drawer-link-item font-family-mono"><a href="#experiences"><span class="nav-num">03.</span>Experiences</a></span>
+        <span class="drawer-link-item font-family-mono"><a href="#projects"><span class="nav-num">04.</span>Projects</a></span>
+        <span class="drawer-link-item font-family-mono"><a href="#contact"><span class="nav-num">05.</span>Contact</a></span>
       </div>
     </nav>
 
     <!-- CONTENT -->
     <div class="content">
       <section id="about">
-        <div class="about-avatar glass"></div>
+        <div class="about-avatar glass hud"></div>
         <div class="about-properties">
-          <div class="about-text glass">
-            <span class="about-text-title">Hi, I'm Nando</span>
-            <span class="about-text-role">Fullstack Developer</span>
+          <div class="about-text glass hud">
+            <div class="terminal-bar">
+              <span class="terminal-dot dot-red"></span>
+              <span class="terminal-dot dot-yellow"></span>
+              <span class="terminal-dot dot-green"></span>
+              <span class="terminal-path font-family-mono">nando@buildwithnando: ~</span>
+            </div>
+            <span class="terminal-cmd font-family-mono"><span class="terminal-prompt">$</span> whoami</span>
+            <span class="about-text-title">Hi, I'm <span class="title-accent">Nando</span></span>
+            <span class="about-text-role font-family-mono">&gt; <span class="typed-role">Software Engineer</span><span
+                class="typed-cursor">▍</span></span>
             <span class="about-text-desc">
-              I am a passionate and results-oriented Fullstack Developer with two years of hands-on experience in
-              building full-stack web applications using the MEAN and MERN stacks.
+              Software engineer focused on building fullstack web applications and AI-powered systems.
+              Two+ years of hands-on experience shipping products with the MERN &amp; MEAN stacks,
+              FastAPI, and LLM integrations.
             </span>
+            <div class="hero-status font-family-mono">
+              <span class="status-dot"></span>
+              <span>open_to_work&nbsp;=&nbsp;<span class="status-true">true</span></span>
+            </div>
           </div>
           <div class="about-button-container">
             <a href="https://wa.me/6285250621375" class="glass about-button about-button-left">
-              <i data-lucide="phone"></i>
-              <span>Let's Talk</span>
+              <i data-lucide="terminal"></i>
+              <span class="font-family-mono">./lets-talk</span>
             </a>
             <a href="/about/cv.pdf" class="glass about-button about-button-right">
               <i data-lucide="file-down"></i>
-              <span>Download CV</span>
+              <span class="font-family-mono">./download-cv</span>
             </a>
           </div>
         </div>
@@ -106,7 +119,7 @@
 
       <!-- SKILLS SECTION (SWIPER) -->
       <section id="skills">
-        <span class="skills-title">Tech & Tools I Use</span>
+        <span class="skills-title section-title">Tech &amp; Tools I Use</span>
         <div class="skills-swiper">
           <div class="swiper-wrapper">
           </div>
@@ -114,35 +127,36 @@
       </section>
 
       <section id="experiences">
-        <span class="experiences-title">Work Experiences</span>
+        <span class="experiences-title section-title">Work Experiences</span>
         <div class="experiences-container">
         </div>
       </section>
 
       <section id="projects">
-        <span class="projects-title">My Projects</span>
+        <span class="projects-title section-title">My Projects</span>
         <div class="projects-container"></div>
       </section>
 
       <section id="contact">
-        <span class="contact-title">Let's build something together</span>
-        <p class="contact-desc">Feel free to react out if you're looking for a developer, have a question, or
+        <span class="contact-title section-title">Let's build something together</span>
+        <p class="contact-desc">Feel free to reach out if you're looking for an engineer, have a question, or
           just want to connect.</p>
         <div class="contact-list">
           <a href="https://mail.google.com/mail/?view=cm&fs=1&to=buildwithnando@gmail.com&su=Collaboration%20Opportunity&body=Hello,%0A%0AI%20hope%20you're%20doing%20well.%20I%20would%20like%20to%20explore%20a%20potential%20collaboration%20opportunity%20with%20you.%20Please%20let%20me%20know%20if%20you're%20available%20to%20discuss%20further.%0A%0AThank%20you!"
-            class="contact-item">
+            class="contact-item glass">
             <i data-lucide="mail"></i>
-            <span>buildwithnando@gmail.com</span>
+            <span class="font-family-mono">buildwithnando@gmail.com</span>
           </a>
-          <a href="https://wa.me/6285250621375" class="contact-item">
+          <a href="https://wa.me/6285250621375" class="contact-item glass">
             <i data-lucide="phone"></i>
-            <span>+62-852-506-213-75</span>
+            <span class="font-family-mono">+62-852-506-213-75</span>
           </a>
         </div>
       </section>
       <section id="footer">
-        <span class="footer-desc">
-          © 2025 Designed and coded with <span class="flutter-pulse">❤️</span> by Fernando Lie
+        <span class="footer-desc font-family-mono">
+          <span class="footer-comment">/* © 2025 Designed and coded with <span class="flutter-pulse">❤️</span> by
+            Fernando Lie */</span>
         </span>
         <div class="footer-list">
           <a href="https://github.com/liecyborg28/liecyborg28?tab=readme-ov-file">
